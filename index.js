@@ -10,7 +10,21 @@ app.use(bodyParse.urlencoded({
     extended : true
 }))
 
-mongoose.connect('mongodb://127.0.0.1:27017/serl');
+// qc1QqUQWCg6caAxZ
+const url = `mongodb+srv://akshat8:qc1QqUQWCg6caAxZ@cluster0.6ggnksx.mongodb.net/?retryWrites=true&w=majority`;
+
+const connectionParams={
+    useNewUrlParser: true,
+    useUnifiedTopology: true 
+}
+
+mongoose.connect(url,connectionParams)
+    .then( () => {
+        console.log('Connected to database ')
+    })
+    .catch( (err) => {
+        console.error(`Error connecting to the database. \n${err}`);
+    })
 var db=mongoose.connection;
 db.on('error', console.log.bind(console, "connection error"));
 db.once('open', function(callback){
@@ -48,7 +62,7 @@ app.post('/login',(req,res)=>{
             }
             else if(err) throw err;
 
-            if(re.password==pass){
+            else if(re.password==pass){
                 console.log("Login Successful");
                 // return res.redirect('html/index.html');
                 res.sendFile(__dirname+ '/public/html/index.html');
