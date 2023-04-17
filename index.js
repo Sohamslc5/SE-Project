@@ -5,6 +5,7 @@ var mongoose = require("mongoose");
 const myModule = require("./public/js/faculty");
 const app = express();
 const ejs = require("ejs");
+import publicationRouter from "./routes/publications.routes.js"
 const newFaculty = require("./faculty_schema");
 const newSignIn = require("./SignInloginDetails");
 const fs = require('fs');
@@ -132,6 +133,7 @@ app.get("/html/Faculty", function (req, res) {
         console.log(e);
     }
 });
+
 app.get("/Faculty", function (req, res) {
     try {
         run();
@@ -154,3 +156,5 @@ app.get("/", function (req, res) {
     })
     .listen(5000);
 console.log("server listening at port 5000");
+
+app.use("/publications",publicationRouter)

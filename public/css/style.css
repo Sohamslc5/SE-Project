@@ -11,6 +11,11 @@ input {
   font-family: "Poppins", sans-serif;
 }
 
+.publication
+{
+    border-style : groove;
+}
+
 .image{
   height: 150px;
   width: 100%;
