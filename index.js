@@ -5,10 +5,10 @@ var mongoose = require("mongoose");
 const myModule = require("./public/js/faculty");
 const app = express();
 const ejs = require("ejs");
-import publicationRouter from "./routes/publications.routes.js"
+const publicationRouter = require("./routes/publications.route.js");
 const newFaculty = require("./faculty_schema");
 const newSignIn = require("./SignInloginDetails");
-const fs = require('fs');
+const fs = require("fs");
 app.set("html", __dirname + "/public");
 app.use(bodyParse.json());
 app.use(express.static("public"));
@@ -29,7 +29,8 @@ const connectionParams = {
     useUnifiedTopology: true,
 };
 
-mongoose.connect(url, connectionParams)
+mongoose
+    .connect(url, connectionParams)
     .then(() => {
         console.log("Connected to database ");
     })
@@ -43,7 +44,7 @@ db.once("open", function (callback) {
 });
 
 app.post("/facultylogin", (req, res) => {
-    try{
+    try {
         var name = req.body.name;
         var email = req.body.email;
         var another_mail = req.body.anotheremail;
@@ -66,16 +67,16 @@ app.post("/facultylogin", (req, res) => {
                 Collegename: collegename,
                 address: address,
                 phone_number: phoneNumber,
-                office_number: Office_Phone,        
+                office_number: Office_Phone,
                 photo: pfp,
                 Interests1: interest1,
                 Interests2: interest2,
-                Interests3: interest3
+                Interests3: interest3,
             });
             console.log(user);
         }
-        res.render("../public/html/Faculty", {user: user});
-    }catch(e){
+        res.render("../public/html/Faculty", { user: user });
+    } catch (e) {
         console.log(e);
     }
 });
@@ -125,11 +126,11 @@ app.post("/login", (req, res) => {
 app.get("/html/Faculty", function (req, res) {
     try {
         run();
-        async function run(){
+        async function run() {
             const user = await newFaculty.find({});
-            res.render("../public/html/Faculty",  {user: user});
+            res.render("../public/html/Faculty", { user: user });
         }
-    }catch(e){
+    } catch (e) {
         console.log(e);
     }
 });
@@ -137,24 +138,23 @@ app.get("/html/Faculty", function (req, res) {
 app.get("/Faculty", function (req, res) {
     try {
         run();
-        async function run(){
+        async function run() {
             const user = await newFaculty.find({});
             console.log(user);
-            res.render("../public/html/Faculty", {user: user});
+            res.render("../public/html/Faculty", { user: user });
         }
-    }catch(e){
+    } catch (e) {
         console.log(e);
     }
 });
 
 app.get("/", function (req, res) {
-        res.set({
-            "Access-control-Allow-Origin": "*",
-        });
-        // return res.redirect('html/index.html');
-        res.sendFile(__dirname + "/public/html/index.html");
-    })
-    .listen(5000);
+    res.set({
+        "Access-control-Allow-Origin": "*",
+    });
+    // return res.redirect('html/index.html');
+    res.sendFile(__dirname + "/public/html/index.html");
+}).listen(5000);
 console.log("server listening at port 5000");
 
-app.use("/publications",publicationRouter)
+app.use("/publications", publicationRouter);

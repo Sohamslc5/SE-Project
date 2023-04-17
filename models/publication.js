@@ -1,9 +1,8 @@
-import { model, Schema } from "mongoose";
-
+const mongoose = require("mongoose");
 const LINK_REGEX =
     /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
 
-const postSchema = new Schema(
+const postSchema = new mongoose.Schema(
     {
         title: { type: String, required: true },
         desc: { type: String },
@@ -20,5 +19,5 @@ const postSchema = new Schema(
     },
     { timestamps: true }
 );
-const post = model("Post", postSchema);
-export default post;
+const post = mongoose.model("Post", postSchema);
+module.exports = post;

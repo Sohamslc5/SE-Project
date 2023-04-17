@@ -1,15 +1,11 @@
-import post from "../models/publication.js";
-
-export const addNewPost = async (req, res) => {
+const post = require("../models/publication.js");
+const addNewPost = async (req, res) => {
     let title = req.body.title,
         desc = req.body.desc,
         links = req.body.links,
         pnames = req.body.peoplename,
-        plinks = req.body.peoplelink,
-    if (
-        title !== undefined &&
-        title !== ""
-    ) {
+        plinks = req.body.peoplelink;
+    if (title !== undefined && title !== "") {
         let newPost = new post({
             title: title,
             desc: desc,
@@ -40,3 +36,4 @@ export const addNewPost = async (req, res) => {
     }
     return res.redirect("/admin");
 };
+module.exports = addNewPost;
