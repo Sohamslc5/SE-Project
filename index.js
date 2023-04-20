@@ -5,7 +5,7 @@ var mongoose = require("mongoose");
 const myModule = require("./public/js/faculty");
 const app = express();
 const ejs = require("ejs");
-const publicationRouter = require("./routes/publications.route.js");
+const publication = require("./publication");
 const newFaculty = require("./faculty_schema");
 const newSignIn = require("./SignInloginDetails");
 const fs = require("fs");
@@ -81,6 +81,32 @@ app.post("/facultylogin", (req, res) => {
     }
 });
 
+app.post("/addPublication", (req, res) => {
+    try {
+	var title = req.body.title;
+	var desc = req.body.desc;
+	var link = req.body.links;
+	var author = req.body.peoplename;
+	var authLink = req.body.peoplelink;
+        run();
+        async function run() {
+            const newPublication = await publication.create({
+		title : title,
+		desc : desc,
+		link : link,
+		author : author,
+		authLink : authLink,
+            });
+            
+            await newPublication.save();
+        }
+        res.render("../public/html/publications");
+    } catch (e) {
+        console.log(e);
+    }
+});
+
+
 app.post("/sign_up", (req, res) => {
     try {
         var username = req.body.username;
@@ -147,7 +173,19 @@ app.get("/Faculty", function (req, res) {
         console.log(e);
     }
 });
+app.get("/Publication",function(req,res){
+        try {
+            run();
+            async function run() {
+                const publications = await publication.find({});
+                console.log(publications);
+                res.render("../public/html/Publication", { publications: publications });
+            }
+        } catch (e) {
+            console.log(e);
+        }
 
+})
 app.get("/", function (req, res) {
     res.set({
         "Access-control-Allow-Origin": "*",
@@ -157,4 +195,3 @@ app.get("/", function (req, res) {
 }).listen(5000);
 console.log("server listening at port 5000");
 
-app.use("/publications", publicationRouter);

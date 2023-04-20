@@ -57,11 +57,65 @@
             </div>
         </div>
     </nav>
+    <ul class="navbar-nav ms-auto">
+            <li class="nav-item ms-2">
+                     <a href="../html/addPublication.html" class="btn bg-gradient-dark mb-0">
+                           Add Publication
+                      </a>
+             </li>
+     </ul>
 
     <div class="row" style="padding:20px;margin:20px;">
                 <div class="col-sm-12;">
                         <div class="card" style="padding:40px;">
 			    <h2>Publications</h2>
+                <% for (let i=0; i < publications.length; i++) { %>
+                    <div class="container">
+                        <div class="row row-cols-2 row-cols-md-2 g-0" style="margin-top: 30px; margin-left: 200px">
+                            <div class="card" style="
+                        border-bottom-right-radius: 0%;
+                        border-top-right-radius: 0%;
+                        width: 350px;
+                        background-color: lightblue;
+                      ">
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        <%= publications[i].title %>
+                                    </h3>
+                                    <p class="card-text">
+                                        <%= publications[i].desc %>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card" style="
+                        border-bottom-left-radius: 0%;
+                        border-top-left-radius: 0%;
+                        background-color: lightcyan;
+                      ">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <strong>
+                                            <h5> Author:</h5>
+                                        </strong>
+                                        <%= publications[i].author %>
+                                    </p>
+                                    <p class="card-text">
+                                        <strong>
+                                            <h5>Read more :</h5>
+                                        </strong>
+                                        <%= publications[i].link %>
+                                    </p>
+                                    <p class="card-text">
+                                        <strong>
+                                            <h5>Author Link:</h5>
+                                        </strong>
+                                        <%= publications[i].authLink %>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
                         </div>
                 </div>
     </div>
