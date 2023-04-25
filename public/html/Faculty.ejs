@@ -73,6 +73,12 @@
     <a href="../html/faculty_form.html"><button type="submit">Click me</button></a>
 
     <!---------------------------------------------Faculty Printing ejs code------------------------------------------------_-->
+    
+    <div class="row" style="padding:20px;margin:20px;">
+        <div class="col-sm-12;">
+                <div class="card" style="padding:40px;">
+        <h2>Faculty</h2>
+    
     <% for (let i=0; i < user.length; i++) { %>
         <div class="container">
             <div class="row row-cols-2 row-cols-md-2 g-0" style="margin-top: 30px; margin-left: 200px">
@@ -153,6 +159,8 @@
         </div>
         <% } %>
 
+    </div>
+
 
             <footer class="footer py-5 bg-gradient-dark position-relative overflow-hidden" style="margin-top: 150px">
                 <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/shapes/waves-white.svg"
@@ -181,7 +189,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white opacity-8" href="../html/publications.html">
+                                    <a class="nav-link text-white opacity-8" href="./Publication">
                                         Publications
                                     </a>
                                 </li>

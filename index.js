@@ -74,8 +74,8 @@ app.post("/facultylogin", (req, res) => {
                 Interests3: interest3,
             });
             console.log(user);
+            res.render("../public/html/Faculty", { user: user });
         }
-        res.render("../public/html/Faculty", { user: user });
     } catch (e) {
         console.log(e);
     }
@@ -91,13 +91,12 @@ app.post("/addPublication", (req, res) => {
         run();
         async function run() {
             const newPublication = await publication.create({
-		title : title,
-		desc : desc,
-		link : link,
-		author : author,
-		authLink : authLink,
+                title : title,
+                desc : desc,
+                link : link,
+                author : author,
+                authLink : authLink,
             });
-            
             await newPublication.save();
         }
         res.render("../public/html/publications");
@@ -173,12 +172,25 @@ app.get("/Faculty", function (req, res) {
         console.log(e);
     }
 });
+
+app.get("/html/Publication", function (req, res) {
+    try {
+        run();
+        async function run() {
+            const publications = await publication.find({});
+            res.render("../public/html/Publication", { publications: publications });
+        }
+    } catch (e) {
+        console.log(e);
+    }
+});
+
 app.get("/Publication",function(req,res){
         try {
             run();
             async function run() {
                 const publications = await publication.find({});
-                console.log(publications);
+                // console.log(publications);
                 res.render("../public/html/Publication", { publications: publications });
             }
         } catch (e) {
