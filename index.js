@@ -6,6 +6,7 @@ const myModule = require("./public/js/faculty");
 const app = express();
 const ejs = require("ejs");
 const publication = require("./publication");
+const project = require("./projects");
 const newFaculty = require("./faculty_schema");
 const newSignIn = require("./SignInloginDetails");
 const fs = require("fs");
@@ -81,7 +82,7 @@ app.post("/facultylogin", (req, res) => {
     }
 });
 
-app.post("/addPublication", (req, res) => {
+app.post("/addPublication", async(req, res) => {
     try {
 	var title = req.body.title;
 	var desc = req.body.desc;
@@ -99,7 +100,38 @@ app.post("/addPublication", (req, res) => {
             });
             await newPublication.save();
         }
-        res.render("../public/html/publications");
+        const publications = await publication.find({});
+        res.render("../public/html/Publication", { publications: publications });
+    } catch (e) {
+        console.log(e);
+    }
+});
+
+app.post("/addProject", async(req, res) => {
+    try {
+	var title = req.body.title;
+	var desc = req.body.desc;
+    var degree = req.body.degree;
+    var date = req.body.date;
+	var link = req.body.links;
+	var author = req.body.peoplename;
+	var authLink = req.body.peoplelink;
+        run();
+        async function run() {
+            const newProject = await project.create({
+                title : title,
+                desc : desc,
+                degree : degree,
+                date : date,
+                link : link,
+                author : author,
+                authLink : authLink,
+            });
+            await newProject.save();
+            console.log(newProject);
+        }
+        const projects = await project.find({});
+        res.render("../public/html/Projects", { projects: projects });
     } catch (e) {
         console.log(e);
     }
@@ -198,6 +230,33 @@ app.get("/Publication",function(req,res){
         }
 
 })
+app.get("/html/Projects",function(req,res){
+    try {
+        run();
+        async function run() {
+            const projects = await project.find({});
+            // console.log(publications);
+            res.render("../public/html/Projects", { projects: projects });
+        }
+    } catch (e) {
+        console.log(e);
+    }
+
+})
+app.get("/Projects",function(req,res){
+    try {
+        run();
+        async function run() {
+            const projects = await project.find({});
+            // console.log(publications);
+            res.render("../public/html/Projects", { projects: projects });
+        }
+    } catch (e) {
+        console.log(e);
+    }
+
+})
+
 app.get("/", function (req, res) {
     res.set({
         "Access-control-Allow-Origin": "*",
