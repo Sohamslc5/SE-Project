@@ -2,7 +2,7 @@ var express = require("express");
 const PORT = 5000;
 var bodyParse = require("body-parser");
 var mongoose = require("mongoose");
-const myModule = require("./public/js/faculty");
+// const myModule = require("./public/js/faculty");
 const app = express();
 const ejs = require("ejs");
 const publication = require("./publication");
@@ -10,6 +10,7 @@ const project = require("./projects");
 const newFaculty = require("./faculty_schema");
 const newSignIn = require("./SignInloginDetails");
 const fs = require("fs");
+const jwt = require("jsonwebtoken");
 app.set("html", __dirname + "/public");
 app.use(bodyParse.json());
 app.use(express.static("public"));
@@ -74,7 +75,7 @@ app.post("/facultylogin", (req, res) => {
                 Interests2: interest2,
                 Interests3: interest3,
             });
-            console.log(user);
+            // console.log(user);
             res.render("../public/html/Faculty", { user: user });
         }
     } catch (e) {
@@ -143,42 +144,72 @@ app.post("/sign_up", (req, res) => {
         var username = req.body.username;
         var email = req.body.email;
         var pass = req.body.password;
+        var fullname = req.body.fullname;
+        var enrolment = req.body.enrolment;
+        var mobileno = req.body.mobileno;
         run();
         async function run() {
             const addSignin = await newSignIn.create({
                 Username: username,
                 Email: email,
                 Password: pass,
+                Fullname: fullname,
+                Enrollment: enrolment,
+                MobileNum: mobileno,
             });
-            console.log(addSignin);
+            // console.log(addSignin);
         }
-        res.sendFile(__dirname + "/public/html/index.html");
+        res.sendFile(__dirname + "/public/html/login.html");
+        // res.redirect('/');
     } catch (e) {
         console.log(e);
     }
 });
 
-app.post("/login", (req, res) => {
+let jwtSecretKey = "serl_jwt_secret_key";
+
+app.post("/login", async (req, res) => {
     try {
         var username = req.body.username;
         var password = req.body.password;
-        run();
-        async function run() {
-            const curr_user = await newSignIn.findOne({ Username: username });
-            if (!curr_user) {
-                res.send("user not found");
-            } else if (curr_user.Password == password) {
-                console.log(username);
-                console.log("login successful");
-                res.sendFile(__dirname + "/public/html/index.html");
-            } else {
-                res.send("password not match");
+
+        const user = await newSignIn.findOne({Username:username});
+        if(!user){
+            return res.json({error : "User not found"});
+        }
+        if (user.Password == password){
+            console.log("login successful");
+            const token = jwt.sign({Username: user.Username},jwtSecretKey);
+            // console.log(token);
+            // res.redirect('/');
+            if(res.status(201)) {
+                return res.json({status:"ok", data : token});
+            }
+            else {
+                return res.json({error : "error"});
             }
         }
+        return res.json({error: "Invalid Password"});
     } catch (e) {
         console.error(e);
     }
 });
+
+app.post("/userdata",async (req,res)=>{
+    const {token} = req.body;
+    try{
+        const user = jwt.verify(token,jwtSecretKey);
+        const username = user.Username;
+        newSignIn.findOne({Username:username}).then((data) =>{
+            res.send({status:"ok",data: data});
+        }).catch((error)=>{
+            res.send({status: "error",data : error});
+        });
+    }
+    catch (error){
+
+    }
+})
 
 app.get("/html/Faculty", function (req, res) {
     try {
@@ -197,7 +228,7 @@ app.get("/Faculty", function (req, res) {
         run();
         async function run() {
             const user = await newFaculty.find({});
-            console.log(user);
+            // console.log(user);
             res.render("../public/html/Faculty", { user: user });
         }
     } catch (e) {
@@ -257,6 +288,9 @@ app.get("/Projects",function(req,res){
 
 })
 
+app.get("/user_profile",(req,res)=>{
+    res.render("../public/html/user_profile");
+})
 app.get("/", function (req, res) {
     res.set({
         "Access-control-Allow-Origin": "*",
