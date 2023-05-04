@@ -71,54 +71,16 @@
         <div class="col-sm-12;">
             <div class="card" style="padding:40px;">
                 <h2>Publications</h2>
-
-                <% for (let i=0; i < Publication_data.length; i++) { %>
-                    <div class="container">
-                        <div class="row row-cols-2 row-cols-md-2 g-0" style="margin-top: 30px;">
-                            <div class="card" style="
-                        border-bottom-right-radius: 0%;
-                        border-top-right-radius: 0%;
-                        width: 350px;
-                        background-color: lightblue;    
-                      ">
-                                <div class="card-body">
-                                    <h3 class="card-title">
-                                        <%= Publication_data[i].title %>
-                                    </h3>
-                                    <p class="card-text">
-                                        <%= Publication_data[i].desc %>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="card" style="
-                        border-bottom-left-radius: 0%;
-                        border-top-left-radius: 0%;
-                        background-color: lightcyan;
-                      ">
-                                <div class="card-body">
-                                    <p class="card-text">
-                                        <strong>
-                                            <h5> Author:</h5>
-                                        </strong>
-                                        <%= Publication_data[i].author %>
-                                    </p>
-                                    <p class="card-text">
-                                        <strong>
-                                            <h5>Read more :</h5>
-                                        </strong>
-                                        <%= Publication_data[i].link %>
-                                    </p>
-                                    <p class="card-text">
-                                        <strong>
-                                            <h5>Author Link:</h5>
-                                        </strong>
-                                        <%= Publication_data[i].authLink %>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <% } %>
+                <% for (let i=0; i < Publication_data.length; i++) { %>    
+                    <div class="temp">
+                    <hr>
+                        <h5><%=Publication_data[i].title%></h5>
+                        <p><strong>Description:</strong> <%=Publication_data[i].desc%> </p>
+                        <p><strong>Author :</strong> <%=Publication_data[i].author%></p>
+                        <p><strong>Publication Link :</strong> <a href="<%=Publication_data[i].link%>"><%=Publication_data[i].link%></a></p>
+                        <p><strong>Author Website :</strong> <a href="<%=Publication_data[i].authLink%>"><%=Publication_data[i].authLink%></a></p>
+                      </div>
+                      <% } %>
             </div>
         </div>
     </div>
