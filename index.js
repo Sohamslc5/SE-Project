@@ -127,7 +127,7 @@ app.post("/addProject", (req, res) => {
                 author : author,
                 authLink : authLink,
             });
-            res.render("../public/html/Projects", { newProject: newProject });
+            res.render("../public/html/Projects", { projects: newProject });
         }
     } catch (e) {
         console.log(e);
@@ -175,6 +175,7 @@ app.post("/sign_up", (req, res) => {
         var fullname = req.body.fullname;
         var enrolment = req.body.enrolment;
         var mobileno = req.body.mobileno;
+        var isAdmin = req.body.isAdmin;
         run();
         async function run() {
             const addSignin = await newSignIn.create({
@@ -184,9 +185,14 @@ app.post("/sign_up", (req, res) => {
                 Fullname: fullname,
                 Enrollment: enrolment,
                 MobileNum: mobileno,
+                isAdmin: isAdmin,
             });
         }
-        res.sendFile(__dirname + "/public/html/login.html");
+        if (res.status(201)) {
+            return res.json({ status: "ok", data: isAdmin });
+        } else {
+            return res.json({ error: "error" });
+        }
     } catch (e) {
         console.log(e);
     }
@@ -291,6 +297,16 @@ app.get("/Projects",function(req,res){
 app.get("/user_profile",(req,res)=>{
     res.render("../public/html/user_profile");
 });
+
+app.get("/contactus",(req,res)=>{
+    res.sendFile(__dirname + "/public/html/contact_us.html");
+})
+app.get("/resources",(req,res)=>{
+    res.sendFile(__dirname + "/public/html/resources.html");
+})
+app.get("/Login",(req,res)=>{
+    res.sendFile(__dirname + "/public/html/login.html");
+})
 app
     .get("/", function (req, res) {
         res.set({

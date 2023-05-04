@@ -7,6 +7,7 @@ const SignInLoginDetails = new mongoose.Schema({
     Fullname: String,
     Enrollment : String,
     MobileNum: String,
+    isAdmin: String,
 })
 
 module.exports = mongoose.model("newLogin", SignInLoginDetails)

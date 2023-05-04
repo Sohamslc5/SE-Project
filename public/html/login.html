@@ -12,6 +12,7 @@
   
   </head>
   <body>
+    
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
@@ -32,36 +33,42 @@
           </form>
 
 
-          <form action="/sign_up" method="post" class="sign-up-form">
+          <form action="" class="sign-up-form">
 	    <a href="index.html">
             <img src="../img/logo.png" class="image" alt="">
 	    </a>
             <h2 class="title">Sign Up</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" id="username" name="username"/>
+              <input type="text" placeholder="Username" id="username" name="username" required/>
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="text" placeholder="Full Name" id="fullname" name="fullname"/>
+              <input type="text" placeholder="Full Name" id="fullname" name="fullname" required/>
             </div>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
-              <input type="email" placeholder="Email" id="email" name="email"/>
+              <input type="email" placeholder="Email" id="email" name="email" required/>
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" id="password" name="password"/>
+              <input type="text" placeholder="Enrollment Number" id="enrolment" name="enrolment" required/>
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="text" placeholder="Enrollment Number" id="enrolment" name="enrolment"/>
+              <input type="tel" placeholder="Mobile Number" id="mobileno" name="mobileno" required/>
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="tel" placeholder="Mobile Number" id="mobileno" name="mobileno"/>
+              <input type="password" placeholder="Password" id="password" name="password" required/>
             </div>
-            <input type="submit" value="Sign Up" class="btn solid" />
+            <div id="admin-check">
+            </div>
+            <div class="admin-check">
+              <input type="checkbox" id="admin" name="admin" value="admin" />
+              <label for="admin">Admin</label>
+            </div>
+            <input type="submit" value="Sign Up" class="btn solid" id="signup-btn"/>
           </form>
         </div>
       </div>
