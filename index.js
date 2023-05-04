@@ -1,14 +1,11 @@
 var express = require("express");
-const PORT = 5000;
 var bodyParse = require("body-parser");
 var mongoose = require("mongoose");
-// const myModule = require("./public/js/faculty");
 const app = express();
-const ejs = require("ejs");
-const publication = require("./publication");
-const newFaculty = require("./faculty_schema");
-const newSignIn = require("./SignInloginDetails");
-const fs = require("fs");
+const newPublication = require("./public/js/publication");
+const newFaculty = require("./public/js/faculty_schema");
+const newSignIn = require("./public/js/SignInloginDetails");
+const newResearcher = require("./public/js/researcher_schema");
 const jwt = require("jsonwebtoken");
 app.set("html", __dirname + "/public");
 app.use(bodyParse.json());
@@ -38,6 +35,7 @@ mongoose
     .catch((err) => {
         console.error(`Error connecting to the database. \n${err}`);
     });
+
 var db = mongoose.connection;
 db.on("error", console.log.bind(console, "connection error"));
 db.once("open", function (callback) {
@@ -74,7 +72,6 @@ app.post("/facultylogin", (req, res) => {
                 Interests2: interest2,
                 Interests3: interest3,
             });
-            // console.log(user);
             res.render("../public/html/Faculty", { user: user });
         }
     } catch (e) {
@@ -84,28 +81,61 @@ app.post("/facultylogin", (req, res) => {
 
 app.post("/addPublication", (req, res) => {
     try {
-	var title = req.body.title;
-	var desc = req.body.desc;
-	var link = req.body.links;
-	var author = req.body.peoplename;
-	var authLink = req.body.peoplelink;
+        var title = req.body.title;
+        var desc = req.body.desc;
+        var link = req.body.links;
+        var author = req.body.peoplename;
+        var authLink = req.body.peoplelink;
         run();
         async function run() {
-            const newPublication = await publication.create({
-                title : title,
-                desc : desc,
-                link : link,
-                author : author,
-                authLink : authLink,
+            const Publication_data = await newPublication.create({
+                title: title,
+                desc: desc,
+                link: link,
+                author: author,
+                authLink: authLink,
             });
-            await newPublication.save();
+            res.render("../public/html/Publication", {
+                Publication_data: Publication_data,
+            });
         }
-        res.render("../public/html/publications");
     } catch (e) {
         console.log(e);
     }
 });
 
+app.post("/Researcher_add", (req, res) => {
+    try {
+        var name = req.body.name;
+        var c_mail = req.body.email;
+        var p_mail = req.body.anotheremail;
+        var Mentor = req.body.mentor;
+        var p_num = req.body.phone;
+        var bio = req.body.bio;
+        var cur_res = req.body.curr_Research;
+        var res_pfp = req.body.pfp;
+        var roll = req.body.RollNumber;
+        run();
+        async function run() {
+            const researcher_data = await newResearcher.create({
+                researcher_Name: name,
+                researcher_CollegeMail: c_mail,
+                researcher_PersonalMail: p_mail,
+                researcher_Bio: bio,
+                researcher_Curr_Research: cur_res,
+                researcher_Mentor_Name: Mentor,
+                researcher_Profile_Pic: res_pfp,
+                researcher_Mobile_Number: p_num,
+                researcher_roll_Num: roll,
+            });
+            res.render("../public/html/Researchers", {
+                researcher_data: researcher_data,
+            });
+        }
+    } catch (e) {
+        console.log(e);
+    }
+});
 
 app.post("/sign_up", (req, res) => {
     try {
@@ -125,10 +155,8 @@ app.post("/sign_up", (req, res) => {
                 Enrollment: enrolment,
                 MobileNum: mobileno,
             });
-            // console.log(addSignin);
         }
         res.sendFile(__dirname + "/public/html/login.html");
-        // res.redirect('/');
     } catch (e) {
         console.log(e);
     }
@@ -141,53 +169,40 @@ app.post("/login", async (req, res) => {
         var username = req.body.username;
         var password = req.body.password;
 
-        const user = await newSignIn.findOne({Username:username});
-        if(!user){
-            return res.json({error : "User not found"});
+        const user = await newSignIn.findOne({ Username: username });
+        if (!user) {
+            return res.json({ error: "User not found" });
         }
-        if (user.Password == password){
+        if (user.Password == password) {
             console.log("login successful");
-            const token = jwt.sign({Username: user.Username},jwtSecretKey);
-            // console.log(token);
-            // res.redirect('/');
-            if(res.status(201)) {
-                return res.json({status:"ok", data : token});
-            }
-            else {
-                return res.json({error : "error"});
+            const token = jwt.sign({ Username: user.Username }, jwtSecretKey);
+            if (res.status(201)) {
+                return res.json({ status: "ok", data: token });
+            } else {
+                return res.json({ error: "error" });
             }
         }
-        return res.json({error: "Invalid Password"});
+        return res.json({ error: "Invalid Password" });
     } catch (e) {
         console.error(e);
     }
 });
 
-app.post("/userdata",async (req,res)=>{
-    const {token} = req.body;
-    try{
-        const user = jwt.verify(token,jwtSecretKey);
-        const username = user.Username;
-        newSignIn.findOne({Username:username}).then((data) =>{
-            res.send({status:"ok",data: data});
-        }).catch((error)=>{
-            res.send({status: "error",data : error});
-        });
-    }
-    catch (error){
-
-    }
-})
-
-app.get("/html/Faculty", function (req, res) {
+app.post("/userdata", async (req, res) => {
+    const { token } = req.body;
     try {
-        run();
-        async function run() {
-            const user = await newFaculty.find({});
-            res.render("../public/html/Faculty", { user: user });
-        }
-    } catch (e) {
-        console.log(e);
+        const user = jwt.verify(token, jwtSecretKey);
+        const username = user.Username;
+        newSignIn
+            .findOne({ Username: username })
+            .then((data) => {
+                res.send({ status: "ok", data: data });
+            })
+            .catch((error) => {
+                res.send({ status: "error", data: error });
+            });
+    } catch (error) {
+        console.log(error);
     }
 });
 
@@ -196,7 +211,6 @@ app.get("/Faculty", function (req, res) {
         run();
         async function run() {
             const user = await newFaculty.find({});
-            // console.log(user);
             res.render("../public/html/Faculty", { user: user });
         }
     } catch (e) {
@@ -204,40 +218,41 @@ app.get("/Faculty", function (req, res) {
     }
 });
 
-app.get("/html/Publication", function (req, res) {
+app.get("/Researchers", function (req, res) {
     try {
         run();
         async function run() {
-            const publications = await publication.find({});
-            res.render("../public/html/Publication", { publications: publications });
+            const researcher_data = await newResearcher.find({});
+            res.render("../public/html/Researchers", {
+                researcher_data: researcher_data,
+            });
         }
     } catch (e) {
         console.log(e);
     }
 });
-
-app.get("/Publication",function(req,res){
-        try {
-            run();
-            async function run() {
-                const publications = await publication.find({});
-                // console.log(publications);
-                res.render("../public/html/Publication", { publications: publications });
-            }
-        } catch (e) {
-            console.log(e);
+app.get("/Publication", function (req, res) {
+    try {
+        run();
+        async function run() {
+            const Publication_data = await newPublication.find({});
+            res.render("../public/html/Publication", {
+                Publication_data: Publication_data,
+            });
         }
-
-})
-app.get("/user_profile",(req,res)=>{
+    } catch (e) {
+        console.log(e);
+    }
+});
+app.get("/user_profile", (req, res) => {
     res.render("../public/html/user_profile");
-})
-app.get("/", function (req, res) {
-    res.set({
-        "Access-control-Allow-Origin": "*",
-    });
-    // return res.redirect('html/index.html');
-    res.sendFile(__dirname + "/public/html/index.html");
-}).listen(5000);
+});
+app
+    .get("/", function (req, res) {
+        res.set({
+            "Access-control-Allow-Origin": "*",
+        });
+        res.sendFile(__dirname + "/public/html/index.html");
+    })
+    .listen(5000);
 console.log("server listening at port 5000");
-

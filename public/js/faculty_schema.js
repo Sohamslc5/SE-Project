@@ -9,7 +9,7 @@ const faculty_schema = new mongoose.Schema({
     address: String,
     phone_number: Number,
     office_number: Number,
-    photo: Buffer,
+    photo: String,
     Interests1: String,
     Interests2: String,
     Interests3: String

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/loopple/loopple.css" />
     <script src="/index.js"></script>
-    <title>Faculty</title>
+    <title>Researchers</title>
 </head>
 
 <body>
@@ -67,16 +67,16 @@
 
 
     <!-- "ye button nikal dena, sirf testing ke liye dala hai" - Soham -->
-    <a href="../html/addFaculty.html"><button type="submit">Click me</button></a>
+    <a href="../html/addResearcher.html"><button type="submit">Click me</button></a>
 
     <!---------------------------------------------Faculty Printing ejs code------------------------------------------------_-->
     
     <div class="row" style="padding:20px;margin:20px;">
         <div class="col-sm-12;">
                 <div class="card" style="padding:40px;">
-        <h2>Faculty</h2>
+        <h2>Researcher</h2>
     
-    <% for (let i=0; i < user.length; i++) { %>
+    <% for (let i=0; i < researcher_data.length; i++) { %>
         <div class="container">
             <div class="row row-cols-2 row-cols-md-2 g-0" style="margin-top: 30px; margin-left: 200px">
                 <div class="card" style="
@@ -87,12 +87,12 @@
           ">
                     <div class="card-body">
                         <h3 class="card-title">
-                            <%= user[i].name %>
+                            Name: <%= researcher_data[i].researcher_Name %>
                         </h3>
                         <p class="card-text">
-                            <%= user[i].Post %>
-                                <br />
-                                <%= user[i].Collegename %>
+                            Enrolment Number: <%= researcher_data[i].researcher_roll_Num %>
+                            <br />
+                            Mentor: <%= researcher_data[i].researcher_Mentor_Name %>
                         </p>
                     </div>
 
@@ -111,43 +111,30 @@
                     <div class="card-body">
                         <p class="card-text">
                             <strong>
-                                <h5> Address:</h5>
+                                <h5>About me:</h5>
                             </strong>
-                            <%= user[i].address %>
+                            <%= researcher_data[i].researcher_Bio %>
                         </p>
                         <p class="card-text">
                             <strong>
-                                <h5>Area of interest:</h5>
+                                <h5>Researching on:</h5>
                             </strong>
-                        <ol>
-                            <li>
-                                <%= user[i].Interests1 %>
-                            </li>
-                            <li>
-                                <%= user[i].Interests2 %>
-                            </li>
-                            <li>
-                                <%= user[i].Interests3 %>
-                            </li>
-                        </ol>
+                            <%= researcher_data[i].researcher_Curr_Research %>
                         </p>
                         <p class="card-text">
                             <strong>
                                 <h5>Contact me:</h5>
                             </strong>
                         <p>
-                            <strong> Office Contact Number: </strong>
-                            <%= user[i].office_number %>
-                                <br>
-                                <strong> Personal Contact Number: </strong>
-                                <%= user[i].phone_number %>
+                            <strong> Personal Contact Number: </strong>
+                            <%= researcher_data[i].researcher_Mobile_Number %>
                         </p>
                         <p>
                             <strong> Office Email Address: </strong>
-                            <%= user[i].College_email %>
+                            <%= researcher_data[i].researcher_CollegeMail %>
                                 <br>
                                 <strong> Personal Email Number: </strong>
-                                <%= user[i].Personal_email %>
+                                <%= researcher_data[i].researcher_PersonalMail %>
                         </p>
                         </p>
                     </div>
@@ -181,17 +168,17 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-white opacity-8" href="/Researchers">
+                                    <a class="nav-link text-white opacity-8" href="../html/researchers.html">
                                         Researchers
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white opacity-8" href="/Publication">
+                                    <a class="nav-link text-white opacity-8" href="./Publication">
                                         Publications
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white opacity-8" href="/Projects">
+                                    <a class="nav-link text-white opacity-8" href="./Projects">
                                         Projects
                                     </a>
                                 </li>
