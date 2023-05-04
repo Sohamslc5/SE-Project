@@ -6,6 +6,12 @@ const newPublication = require("./public/js/publication");
 const newFaculty = require("./public/js/faculty_schema");
 const newSignIn = require("./public/js/SignInloginDetails");
 const newResearcher = require("./public/js/researcher_schema");
+const ejs = require("ejs");
+const publication = require("./publication");
+const project = require("./public/js/project_schema");
+const newFaculty = require("./faculty_schema");
+const newSignIn = require("./SignInloginDetails");
+const fs = require("fs");
 const jwt = require("jsonwebtoken");
 app.set("html", __dirname + "/public");
 app.use(bodyParse.json());
@@ -98,6 +104,33 @@ app.post("/addPublication", (req, res) => {
             res.render("../public/html/Publication", {
                 Publication_data: Publication_data,
             });
+        }
+    } catch (e) {
+        console.log(e);
+    }
+});
+
+app.post("/addProject", (req, res) => {
+    try {
+	var title = req.body.title;
+	var desc = req.body.desc;
+    var degree = req.body.degree;
+    var date = req.body.date;
+	var link = req.body.links;
+	var author = req.body.peoplename;
+	var authLink = req.body.peoplelink;
+        run();
+        async function run() {
+            const newProject = await project.create({
+                title : title,
+                desc : desc,
+                degree : degree,
+                date : date,
+                link : link,
+                author : author,
+                authLink : authLink,
+            });
+            res.render("../public/html/Projects", { newProject: newProject });
         }
     } catch (e) {
         console.log(e);
@@ -244,7 +277,21 @@ app.get("/Publication", function (req, res) {
         console.log(e);
     }
 });
-app.get("/user_profile", (req, res) => {
+
+
+app.get("/Projects",function(req,res){
+    try {
+        run();
+        async function run() {
+            const projects = await project.find({});
+            // console.log(publications);
+            res.render("../public/html/Projects", { projects: projects });
+        }
+    } catch (e) {
+        console.log(e);
+    }
+})
+app.get("/user_profile",(req,res)=>{
     res.render("../public/html/user_profile");
 });
 app

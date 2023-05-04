@@ -33,6 +33,10 @@
         <input type="text" name="desc" id="desc" required placeholder="Enter Description"
           class="form-control form-control-lg" />
       </div>
+      <div class="form-group">
+        <label for="date">Published on :</label>
+        <span style="margin-left: 10px;"><input type="date" id="date" name="date"></span>
+      </div>
       <div class="link-container">
         <div class="form-group">
           <label for="links">Link</label>
@@ -51,6 +55,14 @@
             <input type="url" name="peoplelink" id="peoplelink" placeholder="Add Profile Link" class="form-control" required/>
           </div>
         </div>
+      </div>
+      <div class="form-row" style="margin-top: 10px;">
+        <label for="degree">Degree :</label>
+        <span style="margin-left: 20px;"><select id="my-dropdown" name="degree">
+          <option value="B.Tech">B.Tech</option>
+          <option value="M.Tech">M.Tech</option>
+          <option value="PhD">PhD</option>
+        </select></span>
       </div>
       <div class="form-group"></div>
       <button type="submit" class="btn btn-primary">Submit</button>

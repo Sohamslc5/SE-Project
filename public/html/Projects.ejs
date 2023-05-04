@@ -72,11 +72,11 @@
         <% for (let i=0; i < projects.length; i++) { %>    
         <div class="temp">
         <hr>
-            <h4><%=projects[i].title%></h4>
-            <p><strong>Author :</strong> <%=projects[i].author%></p>
-            <p><strong>Degree :</strong> Bachelor of Computer Science</p>
-            <p><strong>Year:</strong> 2022</p>
+            <h5><%=projects[i].title%></h5>
             <p><strong>Description:</strong> <%=projects[i].desc%> </p>
+            <p><strong>Author :</strong> <%=projects[i].author%></p>
+            <p><strong>Degree :</strong> <%=projects[i].degree%></p>
+            <p><strong>Year:</strong> <%=projects[i].date%></p>      
             <p><strong>Project Link :</strong> <a href="<%=projects[i].link%>"><%=projects[i].link%></a></p>
             <p><strong>Author Website :</strong> <a href="<%=projects[i].authLink%>"><%=projects[i].authLink%></a></p>
           </div>
