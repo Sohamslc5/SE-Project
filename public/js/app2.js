@@ -3,7 +3,7 @@ const $email = document.querySelector('#email');
 const $username = document.querySelector('#user_name');
 const $mobileno = document.querySelector('#mobileno');
 const $enrolment = document.querySelector('#enrolment');
-const publication = require("./publication");
+// const publication = require("./publication");
 fetch("http://localhost:5000/userdata", {
     method: "POST",
     crossDomain: true,
@@ -28,10 +28,10 @@ fetch("http://localhost:5000/userdata", {
     $enrolment.innerHTML = data.data.Enrollment;
     $mobileno.innerHTML = data.data.MobileNum;
     $username.innerHTML = data.data.Username;
-    $pub_data1.innerHTML = curr_user_data[0];
-    $pub_data2.innerHTML = curr_user_data[1];
+    // $pub_data1.innerHTML = curr_user_data[0];
+    // $pub_data2.innerHTML = curr_user_data[1];
 });
-run();
-async function run(){
-    const curr_user_data = await publication.findOne({author: $fullname}); 
-}
+// run();
+// async function run(){
+//     const curr_user_data = await publication.findOne({author: $fullname}); 
+// }
