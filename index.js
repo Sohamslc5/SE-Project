@@ -176,6 +176,7 @@ app.post("/sign_up", (req, res) => {
         var enrolment = req.body.enrolment;
         var mobileno = req.body.mobileno;
         var isAdmin = req.body.isAdmin;
+        var isFaculty = req.body.isFaculty;
         run();
         async function run() {
             const addSignin = await newSignIn.create({
@@ -186,6 +187,7 @@ app.post("/sign_up", (req, res) => {
                 Enrollment: enrolment,
                 MobileNum: mobileno,
                 isAdmin: isAdmin,
+                isFaculty: isFaculty,
             });
         }
         if (res.status(201)) {

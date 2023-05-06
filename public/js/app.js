@@ -42,23 +42,23 @@ login_btn.addEventListener('click',(e)=>{
     });
 })
 
-const checkbox = document.querySelector("input[name=admin]");
+const checkbox = document.querySelector("input[name=faculty]");
 
-const $admin_check = document.querySelector("#admin-check");
+const $faculty_check = document.querySelector("#faculty-check");
 checkbox.addEventListener('change', function() {
     if (this.checked) {
         const lolhtml = `
         <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Admin Key" id="admin-key" name="admin-key" required/>
+              <input type="password" placeholder="Faculty Key" id="faculty-key" name="faculty-key" required/>
             </div>`
-        $admin_check.innerHTML = lolhtml;
+        $faculty_check.innerHTML = lolhtml;
     } else {
     //   console.log("Checkbox is not checked..");
-        $admin_check.innerHTML = '';
+        $faculty_check.innerHTML = '';
     }
 });
-var admin_secret_key = "ma_hu_admin";
+var faculty_secret_key = "ma_hu_faculty";
 signup_btn.addEventListener('click',(e)=>{
     e.preventDefault();
     let username = document.getElementById('username').value;
@@ -68,17 +68,18 @@ signup_btn.addEventListener('click',(e)=>{
     let enrolment = document.getElementById('enrolment').value;
     let mobileno = document.getElementById('mobileno').value;
     let isAdmin = "false";
+    let isFaculty = "false";
     if(username ==="" || password ==="" || email ==="" || fullname ==="" || enrolment ==="" || mobileno ==="" ){
         alert("Please fill all fields");
         return;
     }
     if(checkbox.checked===true){
-        let admin_key = document.getElementById("admin-key").value;
-        if(admin_secret_key===admin_key){
-            isAdmin = "true";
+        let faculty_key = document.getElementById("faculty-key").value;
+        if(faculty_secret_key===faculty_key){
+            isFaculty = "true";
         }
         else {
-            alert("Invalid Admin Key");
+            alert("Invalid Faculty Key");
             return;
         }
     }
@@ -97,6 +98,7 @@ signup_btn.addEventListener('click',(e)=>{
         enrolment,
         mobileno,
         isAdmin,
+        isFaculty,
     }),
 })
     .then((res)=> res.json())

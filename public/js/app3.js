@@ -78,5 +78,43 @@ fetch("http://localhost:5000/userdata", {
       $admin_fac.innerHTML = lolhtml;
     }
   }
+  if(data.data.isFaculty === "true"){
+    if($admin_pub!==null){
+      $admin_pub.innerHTML = '';
+      const lolhtml = `
+      <a href="../html/addPublication.html" class="btn bg-gradient-dark mb-0">
+                  Add Publication
+              </a>
+      `;
+      $admin_pub.innerHTML = lolhtml;
+    }
+    if($admin_rese!==null){
+      $admin_rese.innerHTML = '';
+      const lolhtml = `
+    <a href="../html/addResearcher.html" class="btn bg-gradient-dark mb-0">
+                Add Researcher
+            </a>
+    `;
+      $admin_rese.innerHTML = lolhtml;
+    }
+    if($admin_pro!==null){
+      $admin_pro.innerHTML = '';
+      const lolhtml = `
+      <a href="../html/addProject.html" class="btn bg-gradient-dark mb-0">
+      Add Project
+ </a>
+    `;
+      $admin_pro.innerHTML = lolhtml;
+    }
+//     if($admin_fac!==null){
+//       $admin_fac.innerHTML = '';
+//       const lolhtml = `
+//       <a href="../html/addFaculty.html" class="btn bg-gradient-dark mb-0">
+//       Add Faculty
+//  </a>
+//     `;
+//       $admin_fac.innerHTML = lolhtml;
+//     }
+  }
 });
 }
