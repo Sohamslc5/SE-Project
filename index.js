@@ -75,7 +75,7 @@ app.post("/facultylogin", (req, res) => {
                 Interests2: interest2,
                 Interests3: interest3,
             });
-            res.render("../public/html/Faculty", { user: user });
+            res.redirect('/Faculty');
         }
     } catch (e) {
         console.log(e);
@@ -98,15 +98,12 @@ app.post("/addPublication", (req, res) => {
                 author: author,
                 authLink: authLink,
             });
-            res.render("../public/html/Publication", {
-                Publication_data: Publication_data,
-            });
+            res.redirect('/Publication');
         }
     } catch (e) {
         console.log(e);
     }
 });
-
 app.post("/addProject", (req, res) => {
     try {
 	var title = req.body.title;
@@ -127,7 +124,7 @@ app.post("/addProject", (req, res) => {
                 author : author,
                 authLink : authLink,
             });
-            res.render("../public/html/Projects", { projects: newProject });
+            res.redirect("/Projects");
         }
     } catch (e) {
         console.log(e);
@@ -158,9 +155,7 @@ app.post("/Researcher_add", (req, res) => {
                 researcher_Mobile_Number: p_num,
                 researcher_roll_Num: roll,
             });
-            res.render("../public/html/Researchers", {
-                researcher_data: researcher_data,
-            });
+            res.redirect('/Researchers');
         }
     } catch (e) {
         console.log(e);
@@ -289,7 +284,6 @@ app.get("/Projects",function(req,res){
         run();
         async function run() {
             const projects = await project.find({});
-            // console.log(publications);
             res.render("../public/html/Projects", { projects: projects });
         }
     } catch (e) {

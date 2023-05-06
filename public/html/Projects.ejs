@@ -59,31 +59,83 @@
     </nav>
     <ul class="navbar-nav ms-auto">
             <li class="nav-item ms-2" id="admin-project">
-                     <!-- <a href="../html/addProject.html" class="btn bg-gradient-dark mb-0">
+                     <a href="../html/addProject.html" class="btn bg-gradient-dark mb-0">
                            Add Project
-                      </a> -->
+                      </a>
              </li>
      </ul>
 
      <div class="row" style="padding:20px;margin:20px;">
         <div class="col-sm-12;">
-                <div class="card" style="padding:40px;">
-        <h2>Projects</h2>
-        <% for (let i=0; i < projects.length; i++) { %>    
-        <div class="temp">
-        <hr>
-            <h5><%=projects[i].title%></h5>
-            <p><strong>Description:</strong> <%=projects[i].desc%> </p>
-            <p><strong>Author :</strong> <%=projects[i].author%></p>
-            <p><strong>Degree :</strong> <%=projects[i].degree%></p>
-            <p><strong>Year:</strong> <%=projects[i].date%></p>      
-            <p><strong>Project Link :</strong> <a href="<%=projects[i].link%>"><%=projects[i].link%></a></p>
-            <p><strong>Author Website :</strong> <a href="<%=projects[i].authLink%>"><%=projects[i].authLink%></a></p>
-          </div>
-          <% } %>
-                </div>
+            <div class="card" style="padding:40px;">
+                
+                <h2>Projects</h2>
+                <hr style="height: 2px;">
+                <h4>B.Tech. Projects</h4>
+                <ol>
+                <% for( let i = 0; i < projects.length; i++ ) { %>
+                    <% if (projects[i].degree === "B.Tech" ) { %>
+                        <li style="font-size: larger; font-weight: 600;">
+                        <div class="temp">
+                            <hr>
+                                <h5><%=projects[i].title%></h5>
+                                <p><strong>Description: </strong> <%=projects[i].desc%> </p>
+                                <p><strong>Author: </strong> <%=projects[i].author%></p>
+                                <p><strong>Degree: </strong> <%=projects[i].degree%></p>
+                                <p><strong>Year:</strong> <%=projects[i].date%></p>      
+                                <p><strong>Project Link: </strong> <a href="<%=projects[i].link%>"><%=projects[i].link%></a></p>
+                                <p><strong>Author Website: </strong> <a href="<%=projects[i].authLink%>"><%=projects[i].authLink%></a></p>
+                        </div>
+                    <% } %>
+                </li>
+                <% } %>
+            </ol>
+
+            <hr style="height: 2px;">
+                <h4>M.Tech. Projects</h4>
+                <ol>
+                <% for( let i = 0; i < projects.length; i++ ) { %>
+                    <% if (projects[i].degree === "M.Tech" ) { %>
+                        <li style="font-size: larger; font-weight: 600;">
+                        <div class="temp">
+                            <hr>
+                                <h5><%=projects[i].title%></h5>
+                                <p><strong>Description: </strong> <%=projects[i].desc%> </p>
+                                <p><strong>Author: </strong> <%=projects[i].author%></p>
+                                <p><strong>Degree: </strong> <%=projects[i].degree%></p>
+                                <p><strong>Year:</strong> <%=projects[i].date%></p>      
+                                <p><strong>Project Link: </strong> <a href="<%=projects[i].link%>"><%=projects[i].link%></a></p>
+                                <p><strong>Author Website: </strong> <a href="<%=projects[i].authLink%>"><%=projects[i].authLink%></a></p>
+                        </div>
+                    <% } %>
+                </li>
+                <% } %>
+            </ol>
+
+            <hr style="height: 2px;">
+                <h4>Ph.D. Projects</h4>
+                <ol>
+                <% for( let i = 0; i < projects.length; i++ ) { %>
+                    <% if (projects[i].degree === "PhD" ) { %>
+                        <li style="font-size: larger; font-weight: 600;">
+                        <div class="temp">
+                            <hr>
+                                <h5><%=projects[i].title%></h5>
+                                <p><strong>Description: </strong> <%=projects[i].desc%> </p>
+                                <p><strong>Author: </strong> <%=projects[i].author%></p>
+                                <p><strong>Degree: </strong> Ph.D. </p>
+                                <p><strong>Year:</strong> <%=projects[i].date%></p>      
+                                <p><strong>Project Link: </strong> <a href="<%=projects[i].link%>"><%=projects[i].link%></a></p>
+                                <p><strong>Author Website: </strong> <a href="<%=projects[i].authLink%>"><%=projects[i].authLink%></a></p>
+                        </div>
+                    <% } %>
+                </li>
+                <% } %>
+            </ol>
+
+            </div>
         </div>
-</div>
+    </div>
 
 
     <footer class="footer py-5 bg-gradient-dark position-relative overflow-hidden" style="margin-top: 150px;">
@@ -94,7 +146,7 @@
                     <h6 class="text-white font-weight-bolder text-uppercase mb-lg-4 mb-3">SERL@IIITA</h6>
                     <ul class="nav flex-row ms-n3 align-items-center mb-4 mt-sm-0">
                         <li class="nav-item">
-                            <a class="nav-link text-white opacity-8" href="../html/index.html">
+                            <a class="nav-link text-white opacity-8" href="/">
                                 Home
                             </a>
                         </li>
