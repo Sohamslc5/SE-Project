@@ -104,6 +104,9 @@ signup_btn.addEventListener('click',(e)=>{
     .then((res)=> res.json())
     .then((data)=>{
         console.log(data);
+        if(data.error=="User exist"){
+            alert('Username already exist');
+        }
         if(data.status=="ok"){
             // alert("login successful");
             // window.localStorage.setItem("isAdmin",data.data);

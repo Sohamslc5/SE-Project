@@ -10,6 +10,8 @@ const ejs = require("ejs");
 const project = require("./public/js/project_schema");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 app.set("html", __dirname + "/public");
 app.use(bodyParse.json());
 app.use(express.static("public"));
@@ -162,7 +164,7 @@ app.post("/Researcher_add", (req, res) => {
     }
 });
 
-app.post("/sign_up", (req, res) => {
+app.post("/sign_up", async (req, res) => {
     try {
         var username = req.body.username;
         var email = req.body.email;
@@ -172,12 +174,18 @@ app.post("/sign_up", (req, res) => {
         var mobileno = req.body.mobileno;
         var isAdmin = req.body.isAdmin;
         var isFaculty = req.body.isFaculty;
+        
+        const user = await newSignIn.findOne({ Username: username });
+        if(user){
+            return res.json({error : "User exist"});
+        }
         run();
         async function run() {
+            const hash = await bcrypt.hash(pass,saltRounds);
             const addSignin = await newSignIn.create({
                 Username: username,
                 Email: email,
-                Password: pass,
+                Password: hash,
                 Fullname: fullname,
                 Enrollment: enrolment,
                 MobileNum: mobileno,
@@ -206,7 +214,8 @@ app.post("/login", async (req, res) => {
         if (!user) {
             return res.json({ error: "User not found" });
         }
-        if (user.Password == password) {
+        const validPass = await bcrypt.compare(password,user.Password);
+        if (validPass) {
             console.log("login successful");
             const token = jwt.sign({ Username: user.Username }, jwtSecretKey);
             if (res.status(201)) {

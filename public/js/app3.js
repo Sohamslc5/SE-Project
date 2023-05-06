@@ -106,15 +106,6 @@ fetch("http://localhost:5000/userdata", {
     `;
       $admin_pro.innerHTML = lolhtml;
     }
-//     if($admin_fac!==null){
-//       $admin_fac.innerHTML = '';
-//       const lolhtml = `
-//       <a href="../html/addFaculty.html" class="btn bg-gradient-dark mb-0">
-//       Add Faculty
-//  </a>
-//     `;
-//       $admin_fac.innerHTML = lolhtml;
-//     }
   }
 });
 }
