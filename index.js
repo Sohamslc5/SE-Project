@@ -91,6 +91,8 @@ app.post("/addPublication", (req, res) => {
         var link = req.body.links;
         var author = req.body.peoplename;
         var authLink = req.body.peoplelink;
+        var mentor_name = req.body.mentor;
+        var enrol = req.body.enrol;
         run();
         async function run() {
             const Publication_data = await newPublication.create({
@@ -99,6 +101,8 @@ app.post("/addPublication", (req, res) => {
                 link: link,
                 author: author,
                 authLink: authLink,
+                mentor_name: mentor_name,
+                enrol_num: enrol,
             });
             res.redirect('/Publication');
         }
@@ -111,8 +115,9 @@ app.post("/addProject", (req, res) => {
 	var title = req.body.title;
 	var desc = req.body.desc;
     var degree = req.body.degree;
-    var date = req.body.date;
+    var date = req.body.datepicker;
 	var link = req.body.links;
+    var enrol = req.body.enrol;
 	var author = req.body.peoplename;
 	var authLink = req.body.peoplelink;
         run();
@@ -125,6 +130,7 @@ app.post("/addProject", (req, res) => {
                 link : link,
                 author : author,
                 authLink : authLink,
+                enrol_num: enrol,
             });
             res.redirect("/Projects");
         }

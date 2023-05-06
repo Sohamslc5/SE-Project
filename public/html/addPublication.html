@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Form</title>
+    <title>Publication Form</title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
                         Title
                     </label>
                     <input type="text" name="title" id="title"class="formbold-form-input"
-                        placeholder="Title of publication"/>
+                        placeholder="Title of publication" autofocus/>
                 </div>
 
                 <div class="formbold-input">
@@ -45,6 +45,18 @@
                     <div>
                         <label for="Author Name" class="formbold-form-label">Author Name</label>
                         <input type="text" name="peoplename" id="peoplename" required placeholder="Add Author" class="formbold-form-input" />
+                    </div>
+                    <div>
+                        <label for="Enrolment name" class="formbold-form-label">Enrolment Number</label>
+                        <input type="text" name="enrol" id="enrol" required placeholder="Add Enrolment No." class="formbold-form-input" pattern="[A-Z]{3}[0-9]{4}[0-9]{3}"/>
+                    </div>
+                </div>
+
+                <div class="formbold-input-flex">
+                    
+                    <div>
+                        <label for="Mentor Name" class="formbold-form-label">Mentor Name</label>
+                        <input type="text" name="mentor" id="mentor" placeholder="Add Mentor Name" class="formbold-form-input"/>
                     </div>
                     <div>
                         <label for="Profile Link" class="formbold-form-label">Profile Link</label>

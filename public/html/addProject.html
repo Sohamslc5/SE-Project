@@ -5,7 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Form</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+    $( function() {
+        $( "#datepicker" ).datepicker({
+            dateFormat: "dd-mm-yy"
+        });
+    } );
+    </script>
+    <title>Project Form</title>
 </head>
 
 <body>
@@ -21,10 +32,10 @@
                         Title
                     </label>
                     <input type="text" name="title" id="title"class="formbold-form-input"
-                        placeholder="Title of project"/>
+                        placeholder="Title of project" autofocus/>
                 </div>
 
-                <div class="formbold-input">
+                <div class="formbold-input" style="margin-bottom: 10px;">
                     <div>
                         <label for="Description" class="formbold-form-label">
                             Description
@@ -33,14 +44,14 @@
                     </div>
                 </div>
 
-                <div class="formbold-input" style="margin-bottom: 10px;">
+                <div class="formbold-input-flex" style="margin-bottom: 10px;">
                     <div>
                         <label for="date" class="formbold-form-label">Published on :</label>
-                        <input type="date" id="date" name="date">
+                        <input type="text" id="datepicker" name="datepicker" style="height: 20px;" class="formbold-form-input" placeholder="DD-MM-YYYY">
                     </div>
                 </div>
 
-                <div class="formbold-input">
+                <div class="formbold-input" style="margin-bottom: 10px;">
                     <div>
                       <label for="links" class="formbold-form-label">Link</label>
                       <input type="url" name="links" id="links" required class="formbold-form-input" placeholder="Enter project link" />
@@ -51,21 +62,27 @@
                 <div class="formbold-input-flex">
                     <div>
                         <label for="Author Name" class="formbold-form-label">Author Name</label>
-                        <input type="text" name="peoplename" id="peoplename" required placeholder="Add Author" class="formbold-form-input" />
+                        <input type="text" name="peoplename" id="peoplename" required placeholder="Add Author Name" class="formbold-form-input" />
                     </div>
+                    <div>
+                        <label for="Enrolment Number" class="formbold-form-label">Enrolment Number</label>
+                        <input type="text" name="enrol" id="enrol" placeholder="Add Enrolment Number" class="formbold-form-input" pattern="[A-Z]{3}[0-9]{4}[0-9]{3}" />
+                    </div>
+                </div>
+
+                <div class="formbold-input-flex">
                     <div>
                         <label for="Profile Link" class="formbold-form-label">Profile Link</label>
                         <input type="url" name="peoplelink" id="peoplelink" placeholder="Add Profile Link" class="formbold-form-input"/>
                     </div>
-                </div>
-
-                <div class="formbold-input">
-                    <label for="degree" class="formbold-form-label">Degree :</label>
-                    <select id="my-dropdown" name="degree" class="formbold-form-input">
-                      <option value="B.Tech">B.Tech</option>
-                      <option value="M.Tech">M.Tech</option>
-                      <option value="PhD">PhD</option>
-                    </select>
+                    <div>
+                        <label for="degree" class="formbold-form-label">Degree :</label>
+                        <select id="my-dropdown" name="degree" class="formbold-form-input">
+                        <option value="B.Tech">B.Tech</option>
+                        <option value="M.Tech">M.Tech</option>
+                        <option value="PhD">PhD</option>
+                        </select>
+                    </div>
                 </div>
 
                 <button class="formbold-btn" id="please">Add Project</button>

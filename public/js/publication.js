@@ -8,7 +8,9 @@ const publicationSchema = new mongoose.Schema(
         desc: { type: String },
         link: { type: String, match: LINK_REGEX },
         author : {type : String},
-	authLink : {type : String , match : LINK_REGEX}
+        enrol_num: {type: String},
+        mentor_name: {type: String},
+	    authLink : {type : String , match : LINK_REGEX}
     },
     { timestamps: true }
 );

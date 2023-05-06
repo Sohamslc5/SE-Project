@@ -10,6 +10,7 @@ const projectSchema = new mongoose.Schema(
         date : {type : String},
         link: { type: String, match: LINK_REGEX },
         author : {type : String},
+        enrol_num: {type: String},
 	    authLink : {type : String , match : LINK_REGEX}
     },
     { timestamps: true }
