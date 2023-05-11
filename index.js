@@ -11,6 +11,8 @@ const project = require("./public/js/project_schema");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
+const { log } = require("console");
+const { updateOne } = require("./public/js/researcher_schema");
 const saltRounds = 10;
 app.set("html", __dirname + "/public");
 app.use(bodyParse.json());
@@ -144,7 +146,7 @@ app.post("/Researcher_add", (req, res) => {
         var name = req.body.name;
         var c_mail = req.body.email;
         var p_mail = req.body.anotheremail;
-        var Mentor = req.body.mentor;
+        var Mentor = req.body.Mentor;
         var p_num = req.body.phone;
         var bio = req.body.bio;
         var cur_res = req.body.curr_Research;
@@ -253,7 +255,61 @@ app.post("/userdata", async (req, res) => {
         console.log(error);
     }
 });
-
+app.post("/editResearcher", (req, res) => {
+    try {
+        run();
+        async function run(){
+            var enrolMent = req.body.name;
+            var curr_Researcher = await newResearcher.findOne({researcher_roll_Num: enrolMent});
+            res.render("../public/html/editResearcherForm", {Researcher: curr_Researcher});
+        }
+    } catch (error) {
+        console.log(error);
+    }
+})
+app.post("/updateResearcher", (req, res) => {
+    try {
+        var name = req.body.name;
+        var c_mail = req.body.email;
+        var p_mail = req.body.anotheremail;
+        var Mentor = req.body.Mentor;
+        var p_num = req.body.phone;
+        var bio = req.body.bio;
+        var cur_res = req.body.curr_Research;
+        var res_pfp = req.body.pfp;
+        var roll = req.body.RollNumber;
+        const update = {
+            researcher_Name: name,
+            researcher_CollegeMail: c_mail,
+            researcher_PersonalMail: p_mail,
+            researcher_Bio: bio,
+            researcher_Curr_Research: cur_res,
+            researcher_Mentor_Name: Mentor,
+            researcher_Profile_Pic: res_pfp,
+            researcher_Mobile_Number: p_num
+        };
+        run();
+        async function run() {
+            var hehe = await newResearcher.updateOne({researcher_roll_Num: roll}, update);
+            res.redirect('/Researchers');
+        }
+    } catch (e) {
+        console.error(e);
+    }
+})
+app.post("/deleteResearcher",(req,res)=>{
+    try {
+        run();
+        async function run(){ 
+            var enrolment_number = req.body.name;
+            console.log(enrolment_number);
+            var isDelete = await newResearcher.deleteOne({researcher_roll_Num: enrolment_number});
+            res.redirect('/Researchers');
+        }
+    } catch (e) {
+        console.log(e);
+    }
+})
 app.get("/Faculty", function (req, res) {
     try {
         run();
@@ -308,7 +364,6 @@ app.get("/Projects",function(req,res){
 app.get("/user_profile",(req,res)=>{
     res.render("../public/html/user_profile");
 });
-
 app.get("/contactus",(req,res)=>{
     res.sendFile(__dirname + "/public/html/contact_us.html");
 })

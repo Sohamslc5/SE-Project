@@ -11,9 +11,9 @@
 <body>
     <div class="formbold-main-wrapper">
         <div class="formbold-form-wrapper">
-            <form action="/Researcher_add" method="post" class="Researcher-form" name="Researcher-form">
+            <form action="/updateResearcher" method="post" class="update-Researcher-form" name="update-Researcher-form">
                 <div class="formbold-form-title">
-                    <h2 class="">Enter the details of Researcher below</h2>
+                    <h2 class="">Changing the details for Researcher: <%= Researcher.researcher_roll_Num %> </h2>
                 </div>
 
                 <div class="formbold-input">
@@ -21,13 +21,13 @@
                         <label for="firstname" class="formbold-form-label">
                             Enter name
                         </label>
-                        <input type="text" name="name" id="name" class="formbold-form-input" placeholder="Name" required autofocus/>
+                        <input type="text" name="name" id="name" class="formbold-form-input" value="<%= Researcher.researcher_Name %>" placeholder="Name" required autofocus/>
                     </div>
                     <div>
                         <label for="roll" class="formbold-form-label">
                             Enter Roll Number
                         </label>
-                        <input type="text" name="RollNumber" id="RollNumber" class="formbold-form-input" placeholder="Roll Number" required pattern="[A-Z]{3}[0-9]{4}[0-9]{3}"/>
+                        <input type="text" name="RollNumber" id="RollNumber" class="formbold-form-input" placeholder="Roll Number" required pattern="[A-Z]{3}[0-9]{4}[0-9]{3}" value="<%= Researcher.researcher_roll_Num %>" readonly/>
                     </div>
                 </div>
 
@@ -35,23 +35,22 @@
                     <div>
                         <label for="email" class="formbold-form-label"> Enter Email address</label>
                         <input type="email" name="email" id="email" class="formbold-form-input"
-                            placeholder="xyz@iiita.ac.in" pattern="^[a-zA-Z0-9._%+-]+@iiita\.ac\.in$" required/>
+                            placeholder="xyz@iiita.ac.in" pattern="^[a-zA-Z0-9._%+-]+@iiita\.ac\.in$" value="<%= Researcher.researcher_CollegeMail %>" required/>
                     </div>
                     <div>
                         <label for="email" class="formbold-form-label"> Enter Another Email address</label>
-                        <input type="email" name="anotheremail" id="anotheremail" class="formbold-form-input"
-                            placeholder="xyz@gmail.com" required/>
+                        <input type="email" name="anotheremail" id="anotheremail" class="formbold-form-input" value="<%= Researcher.researcher_PersonalMail %>" placeholder="xyz@gmail.com" required/>
                     </div>
                 </div>
 
                 <div class="formbold-input-flex">
                     <div>
-                        <label for="mentorName" class="formbold-form-label"> Enter Mentor name </label>
-                        <input type="text" name="Mentor" id="Mentor" class="formbold-form-input" placeholder="Mentor name" required/>
+                        <label for="lastname" class="formbold-form-label"> Enter Mentor name </label>
+                        <input type="text" name="Mentor" id="Mentor" class="formbold-form-input" value="<%= Researcher.researcher_Mentor_Name %>" placeholder="Mentor name" required/>
                     </div>
                     <div>
                         <label for="phone" class="formbold-form-label"> Enter Personal Contact number </label>
-                        <input type="text" name="phone" id="phone" class="formbold-form-input"
+                        <input type="text" name="phone" id="phone" class="formbold-form-input" value="<%= Researcher.researcher_Mobile_Number %>"
                             placeholder="Phone Number" required minlength="10" maxlength="10"/>
                     </div>
 
@@ -62,7 +61,7 @@
                     <label for="bio" class="formbold-form-label">
                         About Researcher
                     </label>
-                    <input type="text" name="bio" id="bio" class="formbold-form-input"
+                    <input type="text" name="bio" id="bio" class="formbold-form-input" value="<%= Researcher.researcher_Bio %>"
                         placeholder="About Researcher" required/>
                 </div>
 
@@ -70,15 +69,15 @@
                     <label for="curr_Research" class="formbold-form-label">
                         Current Research Topic
                     </label>
-                    <input type="text" name="curr_Research" id="curr_Research" class="formbold-form-input" placeholder="Currently researching on ..." required />
+                    <input type="text" name="curr_Research" id="curr_Research" class="formbold-form-input" value="<%= Researcher.researcher_Curr_Research %>" placeholder="Currently researching on ..." required />
                 </div>
 
                 <div>
                     <label for="profile_image" class="formbold-form-label">Enter Profile Image</label>
-                    <input type="file" name="pfp" accept="image/jpg" class="formbold-form-input"
+                    <input type="file" name="pfp" accept="image/jpg" class="formbold-form-input" value="<%= Researcher.researcher_Profile_Pic %>"
                         id="pfp" required>
                 </div>
-                <button class="formbold-btn" id="please">Add Researcher</button>
+                <button class="formbold-btn" type="submit" id="please">Update Researcher</button>
             </form>
         </div>
     </div>

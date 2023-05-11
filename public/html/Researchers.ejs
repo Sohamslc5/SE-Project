@@ -82,7 +82,9 @@
     
     <% for (let i=0; i < researcher_data.length; i++) { %>
         <div class="container">
+            
             <div class="row row-cols-2 row-cols-md-2 g-0" style="margin-top: 30px; margin-left: 200px">
+                    
                 <div class="card" style="
             border-bottom-right-radius: 0%;
             border-top-right-radius: 0%;
@@ -99,7 +101,7 @@
                             Mentor: <%= researcher_data[i].researcher_Mentor_Name %>
                         </p>
                     </div>
-
+                    
                     <img src="../img/final1.PNG" class="card-img-top" alt="Profile Pic" style="
               width: 300px;
               align-self: center;
@@ -111,14 +113,32 @@
             border-bottom-left-radius: 0%;
             border-top-left-radius: 0%;
             background-color: lightcyan;
-          ">
+          ">  
                     <div class="card-body">
-                        <p class="card-text">
-                            <strong>
-                                <h5>About me:</h5>
-                            </strong>
-                            <%= researcher_data[i].researcher_Bio %>
-                        </p>
+                        <div class="row">
+                            <div class="col-10">
+                                <p class="card-text">
+                                    <strong>
+                                        <h5>About me:</h5>
+                                    </strong>
+                                    <%= researcher_data[i].researcher_Bio %>
+                                </p>
+                            </div>
+                            <div class="col-2" style="width: 20px">
+                                <div class="row">
+                                    <form action="/editResearcher" method="post">
+                                        <button class="btn-sm" id="editResearcher" type="submit" style="background-color: green; width: 40px; border-radius: 4px;border-color: aliceblue;" data-toggle="tooltip" data-placement="top" title="Edit" name="name" value="<%= researcher_data[i].researcher_roll_Num %>">
+                                            <i class="fa fa-edit" style="color: white; margin-left: 0px; padding-right: 40px;"></i></button>
+                                    </form>
+                                </div>
+                                <div class="row">
+                                    <form action="/deleteResearcher" method="post">
+                                        <button class="btn-sm" id="deleteResearcher" type="submit" style="width: 40px; border-radius: 4px; border-color: aliceblue; background-color: red;"  name="name" value="<%= researcher_data[i].researcher_roll_Num %>" >
+                                            <i class="fa fa-trash" style="color: white; margin-left: 0px; padding-right: 40px;"></i></button></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         <p class="card-text">
                             <strong>
                                 <h5>Researching on:</h5>
@@ -142,8 +162,10 @@
                         </p>
                         </p>
                     </div>
+                    
                 </div>
             </div>
+
         </div>
         <% } %>
 
@@ -214,7 +236,6 @@
             <script
                 src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/js/plugins/flatpickr.min.js"></script>
             <script src="../js/app3.js"></script>
-            <script></script>
 </body>
 
 </html>
