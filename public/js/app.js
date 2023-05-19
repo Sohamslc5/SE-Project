@@ -45,6 +45,7 @@ login_btn.addEventListener('click',(e)=>{
 const checkbox = document.querySelector("input[name=faculty]");
 
 const $faculty_check = document.querySelector("#faculty-check");
+const $enr_no = document.querySelector("#enr-no");
 checkbox.addEventListener('change', function() {
     if (this.checked) {
         const lolhtml = `
@@ -53,9 +54,17 @@ checkbox.addEventListener('change', function() {
               <input type="password" placeholder="Faculty Key" id="faculty-key" name="faculty-key" required/>
             </div>`
         $faculty_check.innerHTML = lolhtml;
+        $enr_no.innerHTML = '';
+
     } else {
     //   console.log("Checkbox is not checked..");
         $faculty_check.innerHTML = '';
+        const lolhtml = `
+        <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="text" placeholder="Enrollment Number" id="enrolment" name="enrolment" required/>
+            </div>`
+        $enr_no.innerHTML = lolhtml;
     }
 });
 var faculty_secret_key = "ma_hu_faculty";
@@ -114,4 +123,14 @@ signup_btn.addEventListener('click',(e)=>{
         }
     });
 })
+
+const checkbox2 = document.querySelector("input[name=forgetpass]");
+checkbox2.addEventListener('change', function() {
+    if (this.checked) {
+        checkbox2.checked = false;
+        window.location.href="/forget-pass";
+    } else {
+
+    }
+});
 
