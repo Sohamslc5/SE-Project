@@ -13,6 +13,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const { log } = require("console");
 const { updateOne } = require("./public/js/researcher_schema");
+const publication = require("./public/js/publication");
 const saltRounds = 10;
 app.set("html", __dirname + "/public");
 app.use(bodyParse.json());
@@ -237,12 +238,13 @@ app.post("/login", async (req, res) => {
         console.error(e);
     }
 });
-
+var curr_okay = null;
 app.post("/userdata", async (req, res) => {
     const { token } = req.body;
     try {
         const user = jwt.verify(token, jwtSecretKey);
         const username = user.Username;
+        curr_okay = username;
         newSignIn
             .findOne({ Username: username })
             .then((data) => {
@@ -362,7 +364,32 @@ app.get("/Projects",function(req,res){
     }
 })
 app.get("/user_profile",(req,res)=>{
-    res.render("../public/html/user_profile");
+    if(curr_okay === null){
+        res.render("../public/html/user_profile");
+    }else{
+        run();
+        async function run(){
+            const ifResearcher = await newResearcher.find({researcher_Name: curr_okay});
+            var validation;
+            if(ifResearcher.length === 0){
+                if(curr_okay === "admin"){
+                    validation = 2; //is admin
+                    const okay = {validation};
+                    res.render("../public/html/user_profile", {Okay: okay});
+                }else{
+                    validation  = 3; //is faculty
+                    const hehe = await newFaculty.findOne({name: curr_okay});
+                    const okay = {validation, hehe};
+                    res.render("../public/html/user_profile", {Okay: okay});
+                }
+            }else{
+                validation = 1; //is researcher
+                const PUB = await publication.find({author: curr_okay});
+                const okay = {validation, PUB};
+                res.render("../public/html/user_profile", {Okay: okay});
+            }
+        }
+    }
 });
 app.get("/contactus",(req,res)=>{
     res.sendFile(__dirname + "/public/html/contact_us.html");

@@ -69,94 +69,221 @@
           </nav>
         </div>
       </div>
+      
+      <% if (Okay.validation === 2) { %>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="card mb-4">
+                  <div class="card-body text-center">
+                    <img src="../img/logo.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                    <h4 class="my-3" id="user_name"></h4>
+                    <p class="text-muted mb-1">
+                      <h4>Admin</h4>
+                    </p>
+                    <p class="text-muted mb-4">SERL IIITA</p>
+                    <div class="d-flex justify-content-center mb-2">
+                    </div>
+                  </div>
+                </div>
+                <div class="card mb-4 mb-lg-0">
+                  <div class="card-body p-0">
+                    <ul class="list-group list-group-flush rounded-3">
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="mb-0">Full Name</p>
+                      </div>
+                      <div class="col-sm-9">
+                        <p class="text-muted mb-0" id="">Admin</p>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="mb-0">Email</p>
+                      </div>
+                      <div class="col-sm-9">
+                        <p class="text-muted mb-0" id="">rds@iiita.ac.in</p>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="mb-0">Mobile</p>
+                      </div>
+                      <div class="col-sm-9">
+                        <p class="text-muted mb-0" id="">91-532-2922000</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+      <% if (Okay.validation==1) { %>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card mb-4">
+              <div class="card-body text-center">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                  class="rounded-circle img-fluid" style="width: 150px;">
+                <h5 class="my-3" id="user_name"></h5>
+                <p class="">Researcher</p>
+                <p class="">SERL IIITA</p>
+              </div>
+            </div>
+            <div class="card mb-4 mb-lg-0">
+              <div class="card-body p-0">
+                <ul class="list-group list-group-flush rounded-3">
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Full Name</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0" id="fullname"></p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Email</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0" id="email"></p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Mobile</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0" id="mobileno"></p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Enrollment Number</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0" id="enrolment"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="card mb-4">
-            <div class="card-body text-center">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                class="rounded-circle img-fluid" style="width: 150px;">
-              <h5 class="my-3" id="user_name"></h5>
-              <p class="text-muted mb-1">Researcher</p>
-              <p class="text-muted mb-4">SERL, IIITA</p>
-              <div class="d-flex justify-content-center mb-2">
-              </div>
+            <div class="row">
+              <% if (Okay.PUB[0]) { %>
+               
+                <div class="col-md-6" id="first_pub">
+                  <div class="card mb-4 mb-md-0">
+                    <div class="card-body">
+                      <p class="mb-4"><span class="text-secondary font-italic me-1">1st</span> Publication
+                      </p>
+                      <p class="mt-4 mb-1" style="font-size: .97rem;">Title: <%= Okay.PUB[0].title %></p>
+                      <p class="mt-4 mb-1" style="font-size: .97rem;">Description: <%= Okay.PUB[0].desc %></p>
+                      <p class="mt-4 mb-1" style="font-size: .97rem;">Link: <%= Okay.PUB[0].link %></p>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+              <% if (Okay.PUB[1]) { %>
+                <div class="col-md-6" id="second_pub">
+                  <div class="card mb-4 mb-md-0">
+                    <div class="card-body">
+                      <p class="mb-4"><span class="text>-secondary font-italic me-1">2nd</span> Publication
+                      </p>
+                      <p class="mt-4 mb-1" style="font-size: .97rem;">Title: <%= Okay.PUB[1].title %></p>
+                      <p class="mt-4 mb-1" style="font-size: .97rem;">Description: <%= Okay.PUB[1].desc %></p>
+                      <p class="mt-4 mb-1" style="font-size: .97rem;">Link: <%= Okay.PUB[1].link %></p>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+              
             </div>
-          </div>
-          <div class="card mb-4 mb-lg-0">
-            <div class="card-body p-0">
-              <ul class="list-group list-group-flush rounded-3">
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-8">
-          <div class="card mb-4">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Full Name</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0" id="fullname"></p>
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Email</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0" id="email"></p>
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Mobile</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0" id="mobileno"></p>
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Enrollment Number</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0" id="enrolment"></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6" id="first_pub">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-4"><span class="text-secondary font-italic me-1">1st</span> Publication
-                  </p>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Title :</p>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Description :</p>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Link :</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6" id="second_pub">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-4"><span class="text-secondary font-italic me-1">2nd</span> Publication
-                  </p>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Title :</p>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Description :</p>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Link :</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            
+            <% } %>
+                      <% if (Okay.validation===3) { %>
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="card mb-4">
+                              <div class="card-body text-center">
+                                <img src="../img/final1.PNG" alt="avatar" class="rounded-circle img-fluid"
+                                  style="width: 150px;">
+                                <h4 class="my-3" id=""><%= Okay.hehe.name %></h4>
+                                <p class="text-muted mb-1">
+                                  Faculty
+                                </p>
+                                
+                                <p class="text-muted mb-4">SERL IIITA</p>
+                                <div class="d-flex justify-content-center mb-2">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card mb-4 mb-lg-0">
+                              <div class="card-body p-0">
+                                <ul class="list-group list-group-flush rounded-3">
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-8">
+                            <div class="card mb-4">
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="col-sm-3">
+                                    <p class="mb-0">Full Name:</p>
+                                  </div>
+                                  <div class="col-sm-9">
+                                    <p class="text-muted mb-0" id=""><%= Okay.hehe.name %></p>
+                                  </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                  <div class="col-sm-3">
+                                    <p class="mb-0">Email:</p>
+                                  </div>
+                                  <div class="col-sm-9">
+                                    <p class="text-muted mb-0" id=""><%= Okay.hehe.College_email %>, <%= Okay.hehe.Personal_email %></p>
+                                  </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                  <div class="col-sm-3">
+                                    <p class="mb-0">Mobile:</p>
+                                  </div>
+                                  <div class="col-sm-9">
+                                    <p class="text-muted mb-0" id=""><%= Okay.hehe.phone_number %>, <%= Okay.hehe.office_number %></p>
+                                  </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                  <div class="col-sm-3">
+                                    <p class="mb-0">Address:</p>
+                                  </div>
+                                  <div class="col-sm-9">
+                                    <p class="text-muted mb-0" id=""><%= Okay.hehe.address %></p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <% } %>
+                          </div>
+                        </div>
+                  </div>
   </section>
   <footer class="footer py-5 bg-gradient-dark position-relative overflow-hidden" style="margin-top: 150px">
     <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/shapes/waves-white.svg"
