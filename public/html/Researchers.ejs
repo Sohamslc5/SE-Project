@@ -126,7 +126,7 @@
                                     <%= researcher_data[i].researcher_Bio %>
                                 </p>
                             </div>
-                            <div class="col-2" style="width: 20px">
+                            <div class="col-2" style="width: 20px" id = "modifydel-btn-researcher">
                                 <div class="row">
                                     <form action="/editResearcher" method="post">
                                         <button class="btn-sm" id="editResearcher" type="submit" style="background-color: green; width: 40px; border-radius: 4px;border-color: aliceblue;" data-toggle="tooltip" data-placement="top" title="Edit" name="name" value="<%= researcher_data[i].researcher_roll_Num %>">
