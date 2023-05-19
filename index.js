@@ -267,6 +267,32 @@ app.post("/editResearcher", (req, res) => {
         console.log(error);
     }
 })
+
+app.post("/editPublication", (req, res) => {
+    try {
+        run();
+        async function run(){
+            var id = req.body.publication_id;
+            var curr_publication = await newPublication.findOne({_id: id});
+            res.render("../public/html/editPublicationForm", {publication: curr_publication});
+        }
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+app.post("/editProject", (req, res) => {
+    try {
+        run();
+        async function run(){
+            var id = req.body.project_id;
+            var curr_project = await project.findOne({_id: id});
+            res.render("../public/html/editProjectForm", {project: curr_project});
+        }
+    } catch (error) {
+        console.log(error);
+    }
+})
 app.post("/updateResearcher", (req, res) => {
     try {
         var name = req.body.name;
@@ -297,6 +323,71 @@ app.post("/updateResearcher", (req, res) => {
         console.error(e);
     }
 })
+
+app.post("/updatePublication", (req, res) => {
+    try {
+        var id = req.body.publication_id;
+        var title = req.body.title;
+        var desc = req.body.desc;
+        var link = req.body.links;
+        var author = req.body.peoplename;
+        var authLink = req.body.peoplelink;
+        var mentor_name = req.body.mentor;
+        var enrol = req.body.enrol;
+        // console.log(desc);
+
+        const update = {
+                
+            title: title,
+            desc: desc,
+            link: link,
+            author: author,
+            authLink: authLink,
+            mentor_name: mentor_name,
+            enrol_num: enrol,
+        };
+        run();
+        async function run() {
+            var hehe = await newPublication.updateOne({_id: id}, update);
+            res.redirect('/Publication');
+        }
+    } catch (e) {
+        console.error(e);
+    }
+})
+
+app.post("/updateProject", (req, res) => {
+    try {
+        var id = req.body.project_id;
+        var title = req.body.title;
+        var desc = req.body.desc;
+        var degree = req.body.degree;
+        var date = req.body.datepicker;
+        var link = req.body.links;
+        var enrol = req.body.enrol;
+        var author = req.body.peoplename;
+        var authLink = req.body.peoplelink;
+
+        const update = {
+                
+                title : title,
+                desc : desc,
+                degree : degree,
+                date : date,
+                link : link,
+                author : author,
+                authLink : authLink,
+                enrol_num: enrol,
+        };
+        run();
+        async function run() {
+            var hehe = await project.updateOne({_id: id}, update);
+            res.redirect('/Projects');
+        }
+    } catch (e) {
+        console.error(e);
+    }
+})
 app.post("/deleteResearcher",(req,res)=>{
     try {
         run();
@@ -310,6 +401,35 @@ app.post("/deleteResearcher",(req,res)=>{
         console.log(e);
     }
 })
+
+app.post("/deletePublication",(req,res)=>{
+    try {
+        run();
+        async function run(){ 
+            var id = req.body.publication_id;
+            console.log('Deleted publication ' . id);
+            var isDelete = await newPublication.deleteOne({_id: id});
+            res.redirect('/Publication');
+        }
+    } catch (e) {
+        console.log(e);
+    }
+})
+
+app.post("/deleteProject",(req,res)=>{
+    try {
+        run();
+        async function run(){ 
+            var id = req.body.project_id;
+            console.log('Deleted project ' . id);
+            var isDelete = await project.deleteOne({_id: id});
+            res.redirect('/Projects');
+        }
+    } catch (e) {
+        console.log(e);
+    }
+})
+
 app.get("/Faculty", function (req, res) {
     try {
         run();

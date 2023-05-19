@@ -75,6 +75,18 @@
                     <div class="temp">
                     <hr>
                         <h5><%=Publication_data[i].title%></h5>
+                        <span style="float:right;">
+                            <form action="/deletePublication" method="post">
+                            <button class="btn-sm" id="deletePublication" type="submit" style="width: 40px; border-radius: 4px; border-color: aliceblue; background-color: red;"  name="publication_id" value="<%= Publication_data[i]._id %>" >
+                                <i class="fa fa-trash" style="color: white; margin-left: 0px; padding-right: 40px;"></i></button></button>
+                            </form>
+                        </span>
+                        <span style="float:right;">
+                            <form action = "/editPublication" method="post">
+                            <button class="btn-sm" id="editPublication" type="submit" style="background-color: green; width: 40px; border-radius: 4px;border-color: aliceblue;" data-toggle="tooltip" data-placement="top" title="Edit" name="publication_id" value="<%= Publication_data[i]._id%>">
+                                <i class="fa fa-edit" style="color: white; margin-left: 0px; padding-right: 40px;"></i></button>
+                                </form>
+                        </span>
                         <p><strong>Description:</strong> <%=Publication_data[i].desc%> </p>
                         <p><strong>Author:</strong> <%=Publication_data[i].author%></p>
                         <p><strong>Enrolment Number:</strong> <%=Publication_data[i].enrol_num%></p>
