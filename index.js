@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParse = require("body-parser");
 var mongoose = require("mongoose");
 const app = express();
+const nodemailer = require("nodemailer");
 const newPublication = require("./public/js/publication");
 const newFaculty = require("./public/js/faculty_schema");
 const newSignIn = require("./public/js/SignInloginDetails");
@@ -493,6 +494,113 @@ app.get("/resources",(req,res)=>{
 app.get("/Login",(req,res)=>{
     res.sendFile(__dirname + "/public/html/login.html");
 })
+app.get("/forget-pass",(req,res)=>{
+    res.sendFile(__dirname+ "/public/html/reset.html");
+})
+app.post('/reset', async (req, res) => {
+    try{
+        const user = await newSignIn.findOne({Email : req.body.email})
+        if(user){
+            const hash = user.Password
+            const resetLink = `http://localhost:5000/reset?email=${user.Email}&hash=${hash}`
+            // return res.status(200).json({
+            //     resetLink
+            // })
+            //remember to send a mail to the user
+            let mailTransporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'Radhikaap948@gmail.com',
+                    pass: 'yliwpjfaenwurmnx'
+                }
+            });
+             
+            let mailDetails = {
+                from: 'Radhikaap948@gmail.com',
+                to: user.Email,
+                subject: 'Reset Password SERL LAB',
+                // text: 'Node.js testing mail for GeeksforGeeks'
+                html: '<p>Click <a href="' + resetLink + '">here</a> to reset your password</p>'
+            };
+            mailTransporter.sendMail(mailDetails, function(err, data) {
+                if(err) {
+                    console.log('Error Occurs');
+                } else {
+                    console.log('Email sent successfully');
+                    res.redirect('/Login');
+                    alert('Mail sent')
+                }
+            });
+        }else{
+            return res.status(400).json({
+                message : "Email Address is invalid"
+            })
+        } 
+    }catch(err){
+        console.log(err)
+        return res.status(500).json({
+            message : "Internal server error"
+        })
+    }
+})
+
+app.get('/reset', async (req, res) => {
+    try {
+        if (req.query && req.query.email && req.query.hash) {
+            // console.log(req.query.email);
+            const user = await newSignIn.findOne({ Email: req.query.email })
+            // console.log(user);
+            if (user) {
+                // const valid = await bcrypt.compare(req.query.hash,user.Password);
+                if (req.query.hash===user.Password) {
+                    // req.session.email = req.query.email;
+                    //issue a password reset form
+                    return res.sendFile(__dirname + '/public/html/new_pass.html')
+                } else {
+                    return res.status(400).json({
+                        message: "You have provided an invalid reset link"
+                    })
+                }
+            } else {
+                return res.status(400).json({
+                    message: "You have provided an invalid reset link"
+                })
+            }
+        } else {
+            return res.render('/forget-pass');
+        }
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json({
+            message: "Internal server error"
+        })
+    }
+})
+
+app.post('/reset-pass', async (req,res)=>{
+    try {
+        var email = req.body.email;
+        var pass = req.body.pass;
+        run();
+        async function run() {
+            const hash = await bcrypt.hash(pass,saltRounds);
+            await newSignIn.updateOne(
+                { Email: email },
+                { $set: { Password: hash } },
+                { new: true }
+              );
+        }
+        if (res.status(201)) {
+            // alert('Password reset done')
+            return res.redirect('/Login');
+        } else {
+            
+        }
+    } catch (e) {
+        console.log(e);
+    }
+})
+
 app
     .get("/", function (req, res) {
         res.set({

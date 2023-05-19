@@ -115,7 +115,14 @@ form.sign-in-form {
   padding: 0 0.4rem;
   position: relative;
 }
-
+#enr-no{
+  max-width: 380px;
+  width: 100%;
+}
+#faculty-check{
+  max-width: 380px;
+  width: 100%;
+}
 .input-field i {
   text-align: center;
   line-height: 55px;
