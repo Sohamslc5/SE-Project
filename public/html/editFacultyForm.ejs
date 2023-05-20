@@ -5,89 +5,91 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script>
-    $( function() {
-        $( "#datepicker" ).datepicker({
-            dateFormat: "dd-mm-yy"
-        });
-    } );
-    </script>
-    <title>Project Form</title>
+    <title>Faculty Form</title>
 </head>
 
 <body>
     <div class="formbold-main-wrapper">
         <div class="formbold-form-wrapper">
-            <form action="/updateProject" method="post" class="faculty-form" name="faculty-form">
+            <form action="/updateFaculty" method="post" class="faculty-form" name="faculty-form">
                 <div class="formbold-form-title">
-                    <h2 class="">Edit the details of project below</h2>
+                    <h2 class="">Edit the details of faculty: <%= fac.name %></h2>
                 </div>
+
+                <div class="formbold-input">
+                    <div>
+                        <label for="firstname" class="formbold-form-label">
+                            Enter name
+                        </label>
+                        <input type="text" name="name" id="name" class="formbold-form-input" 
+                        value="<%= fac.name %>" placeholder="Name" required autofocus readonly/>
+                    </div>
+                </div>
+
+                <div class="formbold-input-flex">
+                    <div>
+                        <label for="email" class="formbold-form-label"> Enter Email address</label>
+                        <input type="email" name="email" id="email" class="formbold-form-input"
+                            placeholder="xyz@iiita.ac.in" pattern="^[a-zA-Z0-9._%+-]+@iiita\.ac\.in$" value="<%= fac.College_email %>" required readonly/>
+                    </div>
+                    <div>
+                        <label for="email" class="formbold-form-label"> Enter Another Email address</label>
+                        <input type="email" name="anotheremail" id="anotheremail" class="formbold-form-input"
+                            placeholder="xyz@gmail.com" required value="<%= fac.Personal_email %>"/>
+                    </div>
+                </div>
+
+                <div class="formbold-input-flex">
+                    <div>
+                        <label for="lastname" class="formbold-form-label"> Post </label>
+                        <input type="text" name="post" id="post" class="formbold-form-input" placeholder="Post" 
+                        value="<%= fac.Post %>" required/>
+                    </div>
+                    <div>
+                        <label for="College Name" class="formbold-form-label">College Name:</label>
+                        <input type="text" name="CollegeName" id="CollegeName" class="formbold-form-input"
+                            placeholder="College Name" value="<%= fac.Collegename %>" required/>
+                    </div>
+
+                </div>
+
                 <div class="formbold-mb-3">
 
-                    <label for="Title" class="formbold-form-label">
-                        Title
+                    <label for="address" class="formbold-form-label">
+                        Office Address
                     </label>
-                    <input type="text" name="title" id="title"class="formbold-form-input"
-                        placeholder="Title of project" value="<%=project.title%>" autofocus readonly/>
+                    <input type="text" name="address" id="address" class="formbold-form-input"
+                        placeholder="Office Address" required minlength="20" value="<%= fac.address %>"/>
                 </div>
 
-                <div class="formbold-input" style="margin-bottom: 10px;">
-                    <div>
-                        <label for="Description" class="formbold-form-label">
-                            Description
-                        </label>
-                        <input type="text" name="desc" id="desc" class="formbold-form-input" placeholder="Description of project" value="<%=project.desc%>"required/>
-                    </div>
-                </div>
-
-                <input type="hidden" name = "project_id" value ="<%=project._id %>">
-
-                <div class="formbold-input-flex" style="margin-bottom: 10px;">
-                    <div>
-                        <label for="date" class="formbold-form-label">Published on :</label>
-                        <input type="text" id="datepicker" name="datepicker" style="height: 20px;" class="formbold-form-input" placeholder="DD-MM-YYYY" value="<%=project.date%>">
-                    </div>
-                </div>
-
-                <div class="formbold-input" style="margin-bottom: 10px;">
-                    <div>
-                      <label for="links" class="formbold-form-label">Link</label>
-                      <input type="url" name="links" id="links" required class="formbold-form-input" placeholder="Enter project link" value="<%=project.link%>" />
-                    </div>
-                  </div>
-
-
-                <div class="formbold-input-flex">
-                    <div>
-                        <label for="Author Name" class="formbold-form-label">Author Name</label>
-                        <input type="text" name="peoplename" id="peoplename" required placeholder="Add Author Name" class="formbold-form-input" value="<%=project.author%>" />
-                    </div>
-                    <div>
-                        <label for="Enrolment Number" class="formbold-form-label">Enrolment Number</label>
-                        <input type="text" name="enrol" id="enrol" placeholder="Add Enrolment Number" class="formbold-form-input" pattern="[A-Z]{3}[0-9]{4}[0-9]{3}" value="<%=project.enrol_num%>" readonly/>
-                    </div>
+                <div class="formbold-mb-3">
+                    <label for="address" class="formbold-form-label">
+                        Topics of Interest
+                    </label>
+                    <input type="text" name="interest1" id="interest1" class="formbold-form-input" placeholder="Topic of Interest-1" required style="width: 300px; margin-left: 100px;" value="<%= fac.Interests1%>"/>
+                    <input type="text" name="interest2" id="interest2" class="formbold-form-input" placeholder="Topic of Interest-2" required style="margin-top: 5px; width: 300px; margin-left: 100px;" value="<%= fac.Interests2%>"/>
+                    <input type="text" name="interest3" id="interest3" class="formbold-form-input" placeholder="Topic of Interest-3" required style="margin-top: 5px; width: 300px; margin-left: 100px;" value="<%= fac.Interests3%>"/>
                 </div>
 
                 <div class="formbold-input-flex">
                     <div>
-                        <label for="Profile Link" class="formbold-form-label">Profile Link</label>
-                        <input type="url" name="peoplelink" id="peoplelink" placeholder="Add Profile Link" class="formbold-form-input" value="<%=project.authLink%>"/>
+                        <label for="phone" class="formbold-form-label"> Enter Personal Contact number </label>
+                        <input type="text" name="phone" id="phone" class="formbold-form-input"
+                            placeholder="Phone Number" required value="<%= fac.phone_number %>"/>
                     </div>
                     <div>
-                        <label for="degree" class="formbold-form-label">Degree :</label>
-                        <select id="my-dropdown" name="degree" class="formbold-form-input" value="<%=project.degree%>">
-                        <option value="B.Tech">B.Tech</option>
-                        <option value="M.Tech">M.Tech</option>
-                        <option value="PhD">PhD</option>
-                        </select>
+                        <label for="phone" class="formbold-form-label"> Enter Office contact number </label>
+                        <input type="text" name="officephone" id="officephone" class="formbold-form-input"
+                            placeholder="Phone Number" required value="<%= fac.office_number %>"/>
                     </div>
                 </div>
 
-                <button class="formbold-btn" id="please">Change Project</button>
+                <div>
+                    <label for="profile_image" class="formbold-form-label">Enter Profile Image</label>
+                    <input type="file" name="pfp" accept="image/jpg" class="formbold-form-input"
+                        id="pfp" required>
+                </div>
+                <button class="formbold-btn" id="please">Add Faculty Member</button>
             </form>
         </div>
     </div>

@@ -50,10 +50,10 @@ fetch("http://localhost:5000/userdata", {
       <a href="../html/addPublication.html" class="btn bg-gradient-dark mb-0">
                   Add Publication
               </a>
-              <a href="" class="btn bg-gradient-dark mb-0">
+              <a href="../html/editPub.html" class="btn bg-gradient-dark mb-0">
                   Modify Publication
               </a>
-              <a href="" class="btn bg-gradient-dark mb-0">
+              <a href="../html/deletePublicationForm.html" class="btn bg-gradient-dark mb-0">
                   Delete Publication
               </a>
       `;
@@ -65,10 +65,10 @@ fetch("http://localhost:5000/userdata", {
     <a href="../html/addResearcher.html" class="btn bg-gradient-dark mb-0">
                 Add Researcher
             </a>
-            <a href="" class="btn bg-gradient-dark mb-0">
+            <a href="../html/editRes.html" class="btn bg-gradient-dark mb-0">
                   Modify Researcher
               </a>
-              <a href="" class="btn bg-gradient-dark mb-0">
+              <a href="../html/deleteResearcherForm.html" class="btn bg-gradient-dark mb-0">
                   Delete Researcher
               </a>
     `;
@@ -80,10 +80,10 @@ fetch("http://localhost:5000/userdata", {
       <a href="../html/addProject.html" class="btn bg-gradient-dark mb-0">
       Add Project
  </a>
- <a href="" class="btn bg-gradient-dark mb-0">
+          <a href="../html/editPro.html" class="btn bg-gradient-dark mb-0">
                   Modify Project
               </a>
-              <a href="" class="btn bg-gradient-dark mb-0">
+              <a href="../html/deleteProjectsForm.html" class="btn bg-gradient-dark mb-0">
                   Delete Project
               </a>
     `;
@@ -95,10 +95,10 @@ fetch("http://localhost:5000/userdata", {
       <a href="../html/addFaculty.html" class="btn bg-gradient-dark mb-0">
       Add Faculty
  </a>
- <a href="" class="btn bg-gradient-dark mb-0">
+      <a href="../html/editFac.html" class="btn bg-gradient-dark mb-0">
                   Modify Faculty
               </a>
-              <a href="" class="btn bg-gradient-dark mb-0">
+              <a href="../html/deleteFacultyForm.html" class="btn bg-gradient-dark mb-0">
                   Delete Faculty
               </a>
     `;
@@ -178,13 +178,13 @@ fetch("http://localhost:5000/userdata", {
     if($admin_rese!==null){
       $admin_rese.innerHTML = '';
       const lolhtml = `
-    <a href="../html/addResearcher.html" class="btn bg-gradient-dark mb-0">
+            <a href="../html/addResearcher.html" class="btn bg-gradient-dark mb-0">
                 Add Researcher
             </a>
-            <a href="" class="btn bg-gradient-dark mb-0">
+            <a href="./html/editRes.html" class="btn bg-gradient-dark mb-0">
                   Modify Researcher
               </a>
-              <a href="" class="btn bg-gradient-dark mb-0">
+              <a href="./public/html/deleteResearcherForm.html" class="btn bg-gradient-dark mb-0">
                   Delete Researcher
               </a>
     `;

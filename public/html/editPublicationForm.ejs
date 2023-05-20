@@ -21,7 +21,7 @@
                         Title
                     </label>
                     <input type="text" name="title" id="title"class="formbold-form-input"
-                        placeholder="Title of publication" value="<%=publication.title%>" autofocus/>
+                        placeholder="Title of publication" value="<%=publication.title%>" autofocus readonly/>
                 </div>
 
                 <div class="formbold-input">
@@ -46,11 +46,11 @@
                 <div class="formbold-input-flex">
                     <div>
                         <label for="Author Name" class="formbold-form-label">Author Name</label>
-                        <input type="text" name="peoplename" id="peoplename" required placeholder="Add Author" class="formbold-form-input" value="<%=publication.author%>" />
+                        <input type="text" name="peoplename" id="peoplename" required placeholder="Add Author" class="formbold-form-input" value="<%=publication.author%>"/>
                     </div>
                     <div>
                         <label for="Enrolment name" class="formbold-form-label">Enrolment Number</label>
-                        <input type="text" name="enrol" id="enrol"  placeholder="Add Enrolment No." class="formbold-form-input" pattern="[A-Z]{3}[0-9]{4}[0-9]{3}" value="<%=publication.enrol_num%>"/>
+                        <input type="text" name="enrol" id="enrol"  placeholder="Add Enrolment No." class="formbold-form-input" pattern="[A-Z]{3}[0-9]{4}[0-9]{3}" value="<%=publication.enrol_num%>" readonly/>
                     </div>
                 </div>
 

@@ -262,9 +262,13 @@ app.post("/editResearcher", (req, res) => {
     try {
         run();
         async function run(){
-            var enrolMent = req.body.name;
+            var enrolMent = req.body.enrol;
             var curr_Researcher = await newResearcher.findOne({researcher_roll_Num: enrolMent});
-            res.render("../public/html/editResearcherForm", {Researcher: curr_Researcher});
+            if(curr_Researcher){
+                res.render("../public/html/editResearcherForm", {Researcher: curr_Researcher});
+            }else{
+                res.send("Researcher not found");
+            }
         }
     } catch (error) {
         console.log(error);
@@ -275,8 +279,11 @@ app.post("/editPublication", (req, res) => {
     try {
         run();
         async function run(){
-            var id = req.body.publication_id;
-            var curr_publication = await newPublication.findOne({_id: id});
+            var author = req.body.enrol;
+            var title = req.body.title;
+            // var id = req.body.publication_id;
+            var curr_publication = await newPublication.findOne({enrol_num: author, title: title});
+            // console.log(curr_publication);
             res.render("../public/html/editPublicationForm", {publication: curr_publication});
         }
     } catch (error) {
@@ -288,14 +295,67 @@ app.post("/editProject", (req, res) => {
     try {
         run();
         async function run(){
-            var id = req.body.project_id;
-            var curr_project = await project.findOne({_id: id});
+            var title = req.body.title;
+            var enrol = req.body.enrol;
+            // var isDelete = await project.deleteOne({});
+            var curr_project = await project.findOne({title: title, enrol_num: enrol});
             res.render("../public/html/editProjectForm", {project: curr_project});
         }
     } catch (error) {
         console.log(error);
     }
 })
+
+app.post("/editFaculty",(req,res)=>{
+    try {
+        run();
+        async function run(){ 
+            var title = req.body.name;
+            var cmail = req.body.cmail;
+            var fac = await newFaculty.findOne({name: title, College_email: cmail});
+            res.render("../public/html/editFacultyForm", {fac: fac});
+        }
+    } catch (e) {
+        console.log(e);
+    }
+})
+
+app.post("/updateFaculty", (req, res)=>{
+    try {
+        var name = req.body.name;
+        var email = req.body.email;
+        var another_mail = req.body.anotheremail;
+        var post = req.body.post;
+        var collegename = req.body.CollegeName;
+        var address = req.body.address;
+        var phoneNumber = req.body.phone;
+        var Office_Phone = req.body.officephone;
+        var pfp = req.body.pfp;
+        var interest1 = req.body.interest1;
+        var interest2 = req.body.interest2;
+        var interest3 = req.body.interest3;
+        const update = {
+            Personal_email: another_mail,
+            Post: post,
+            Collegename: collegename,
+            address: address,
+            phone_number: phoneNumber,
+            office_number: Office_Phone,
+            photo: pfp,
+            Interests1: interest1,
+            Interests2: interest2,
+            Interests3: interest3,
+        };
+        run();
+        async function run() {
+            var hehe = await newFaculty.updateOne({name: name, College_email: email}, update);
+            res.redirect('/Faculty');
+        }
+    } catch (e) {
+        console.log(e);
+    } 
+});
+
 app.post("/updateResearcher", (req, res) => {
     try {
         var name = req.body.name;
@@ -329,7 +389,6 @@ app.post("/updateResearcher", (req, res) => {
 
 app.post("/updatePublication", (req, res) => {
     try {
-        var id = req.body.publication_id;
         var title = req.body.title;
         var desc = req.body.desc;
         var link = req.body.links;
@@ -340,18 +399,16 @@ app.post("/updatePublication", (req, res) => {
         // console.log(desc);
 
         const update = {
-                
-            title: title,
             desc: desc,
             link: link,
-            author: author,
             authLink: authLink,
             mentor_name: mentor_name,
-            enrol_num: enrol,
+            author: author,
+            // enrol_num: enrol,
         };
         run();
         async function run() {
-            var hehe = await newPublication.updateOne({_id: id}, update);
+            var hehe = await newPublication.updateOne({title: title, enrol_num: enrol}, update);
             res.redirect('/Publication');
         }
     } catch (e) {
@@ -371,20 +428,17 @@ app.post("/updateProject", (req, res) => {
         var author = req.body.peoplename;
         var authLink = req.body.peoplelink;
 
-        const update = {
-                
-                title : title,
+        const update = {               
                 desc : desc,
                 degree : degree,
                 date : date,
                 link : link,
                 author : author,
                 authLink : authLink,
-                enrol_num: enrol,
         };
         run();
         async function run() {
-            var hehe = await project.updateOne({_id: id}, update);
+            var hehe = await project.updateOne({title: title, enrol_num: enrol}, update);
             res.redirect('/Projects');
         }
     } catch (e) {
@@ -395,7 +449,7 @@ app.post("/deleteResearcher",(req,res)=>{
     try {
         run();
         async function run(){ 
-            var enrolment_number = req.body.name;
+            var enrolment_number = req.body.enrol;
             console.log(enrolment_number);
             var isDelete = await newResearcher.deleteOne({researcher_roll_Num: enrolment_number});
             res.redirect('/Researchers');
@@ -404,14 +458,14 @@ app.post("/deleteResearcher",(req,res)=>{
         console.log(e);
     }
 })
-
 app.post("/deletePublication",(req,res)=>{
     try {
         run();
         async function run(){ 
-            var id = req.body.publication_id;
-            console.log('Deleted publication ' . id);
-            var isDelete = await newPublication.deleteOne({_id: id});
+            var author = req.body.enrol;
+            var title = req.body.title;
+            console.log('Deleted publication ' + author + title);
+            var isDelete = await newPublication.deleteOne({enrol_num: author, title: title});
             res.redirect('/Publication');
         }
     } catch (e) {
@@ -423,16 +477,28 @@ app.post("/deleteProject",(req,res)=>{
     try {
         run();
         async function run(){ 
-            var id = req.body.project_id;
-            console.log('Deleted project ' . id);
-            var isDelete = await project.deleteOne({_id: id});
+            var title = req.body.title;
+            var enrol = req.body.enrol;
+            var isDelete = await project.deleteOne({title: title, enrol_num: enrol});
             res.redirect('/Projects');
         }
     } catch (e) {
         console.log(e);
     }
 })
-
+app.post("/deleteFaculty",(req,res)=>{
+    try {
+        run();
+        async function run(){ 
+            var title = req.body.name;
+            var cmail = req.body.cmail;
+            var isDelete = await newFaculty.deleteOne({name: title, College_email: cmail});
+            res.redirect('/Faculty');
+        }
+    } catch (e) {
+        console.log(e);
+    }
+})
 app.get("/Faculty", function (req, res) {
     try {
         run();
