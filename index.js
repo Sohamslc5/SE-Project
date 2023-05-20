@@ -535,10 +535,16 @@ app.post('/reset', async (req, res) => {
             // })
             //remember to send a mail to the user
             let mailTransporter = nodemailer.createTransport({
-                service: 'gmail',
+                // service: 'gmail',
+                // type: "SMTP",
+                host: "smtp.gmail.com",
+                port: 465,
+                secure: true,
+                // host: "sandbox.smtp.mailtrap.io",
+                // port: 2525,
                 auth: {
                     user: 'Radhikaap948@gmail.com',
-                    pass: 'yliwpjfaenwurmnx'
+                    pass: 'ihnsqofktnxkdubu'
                 }
             });
              
@@ -552,6 +558,7 @@ app.post('/reset', async (req, res) => {
             mailTransporter.sendMail(mailDetails, function(err, data) {
                 if(err) {
                     console.log('Error Occurs');
+                    console.log(err);
                 } else {
                     console.log('Email sent successfully');
                     res.redirect('/Login');
