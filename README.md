@@ -6,7 +6,7 @@ The SERL website functions as a content management system, enabling users to add
 This project is created by a group of five 3rd (third) Semester students of IIITA. 
 
 
-## Features:
+## My Work:
 - SERL IIITA is a Website for Researchers and Faculty of IIIT-Allahabad where authorized user can view, add, delete or modify information regarding Researchers, Projects, Faculty and Publications.
 - Co-Authored backend using Node-JS(Express), developed REST APIs, created routes and used MongoDB (Atlas) as database.
 - Co-Authored frontend using EJS templating, to render JS Objects directly from the backend.
