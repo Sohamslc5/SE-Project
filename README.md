@@ -3,7 +3,7 @@ Software Engineering and Research Lab IIITA is a website for Researchers and Fac
 ## Description
 The SERL website functions as a content management system, enabling users to add, update, and delete information about projects, publications, faculty, and researchers. It employs a client-server architecture with RESTful APIs for CRUD operations, ensuring efficient data management and user authentication.
 
-This project is created by a group of five 4th Semester students of IIITA. 
+This project is created by a group of five 3rd (third) Semester students of IIITA. 
 
 
 ## Features:
