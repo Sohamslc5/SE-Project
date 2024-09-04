@@ -27,8 +27,8 @@ app.use(
 
 app.set("view engine", "ejs");
 // qc1QqUQWCg6caAxZ
-const url = `mongodb+srv://akshat8:qc1QqUQWCg6caAxZ@cluster0.6ggnksx.mongodb.net/?retryWrites=true&w=majority`;
-
+// const url = `mongodb+srv://akshat8:qc1QqUQWCg6caAxZ@cluster0.6ggnksx.mongodb.net/?retryWrites=true&w=majority`;
+const url = 'mongodb+srv://sohamslc5:Soham%402989@se-project.o2h3pf3.mongodb.net/?retryWrites=true&w=majority';
 // const url = `mongodb://127.0.0.1:27017/SERL_IIITA`;
 
 const connectionParams = {
